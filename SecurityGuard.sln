@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation Layer", "1 - Presentation Layer", "{C38824DC-A3BE-43ED-96E3-DF53D1FB0392}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Core", "2 - Core", "{2769598F-AB85-4413-A4C4-5208628BA00E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityGuard", "SecurityGuard\SecurityGuard.csproj", "{33F69F45-26FC-4B7E-A8DD-145403921D49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StandardMvcApp", "StandardMvcApp\StandardMvcApp.csproj", "{D978B706-6E8C-45FF-969C-A81833F6B934}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StandardMvcApp.Tests", "StandardMvcApp.Tests\StandardMvcApp.Tests.csproj", "{F3151291-339A-4DC3-81AC-1D7837723003}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Unit Tests", "3 - Unit Tests", "{F3DB7541-6325-4E00-99FD-0D1A36322E34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityGuard.Tests", "SecurityGuard.Tests\SecurityGuard.Tests.csproj", "{8575033E-C5B3-416D-AC4E-C8D6300AA898}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CA2EA059-8FDB-4E88-B554-DFA6B604CEE7}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		SecurityGuard.vsmdi = SecurityGuard.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = SecurityGuard.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33F69F45-26FC-4B7E-A8DD-145403921D49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33F69F45-26FC-4B7E-A8DD-145403921D49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33F69F45-26FC-4B7E-A8DD-145403921D49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33F69F45-26FC-4B7E-A8DD-145403921D49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D978B706-6E8C-45FF-969C-A81833F6B934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D978B706-6E8C-45FF-969C-A81833F6B934}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D978B706-6E8C-45FF-969C-A81833F6B934}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D978B706-6E8C-45FF-969C-A81833F6B934}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3151291-339A-4DC3-81AC-1D7837723003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3151291-339A-4DC3-81AC-1D7837723003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3151291-339A-4DC3-81AC-1D7837723003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3151291-339A-4DC3-81AC-1D7837723003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8575033E-C5B3-416D-AC4E-C8D6300AA898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8575033E-C5B3-416D-AC4E-C8D6300AA898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8575033E-C5B3-416D-AC4E-C8D6300AA898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8575033E-C5B3-416D-AC4E-C8D6300AA898}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D978B706-6E8C-45FF-969C-A81833F6B934} = {C38824DC-A3BE-43ED-96E3-DF53D1FB0392}
+		{F3151291-339A-4DC3-81AC-1D7837723003} = {C38824DC-A3BE-43ED-96E3-DF53D1FB0392}
+		{33F69F45-26FC-4B7E-A8DD-145403921D49} = {2769598F-AB85-4413-A4C4-5208628BA00E}
+		{8575033E-C5B3-416D-AC4E-C8D6300AA898} = {F3DB7541-6325-4E00-99FD-0D1A36322E34}
+		{CA2EA059-8FDB-4E88-B554-DFA6B604CEE7} = {F3DB7541-6325-4E00-99FD-0D1A36322E34}
+	EndGlobalSection
+EndGlobal

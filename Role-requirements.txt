@@ -1,0 +1,11 @@
+Role Requirements
+
+CREATE ROLE
+	1)  click "Create Role" link on Dashboard or on Manage Roles view
+	2)  enter name of Role in text box
+	3)  click the "Add" button
+	4)  new role appears in Roles list 
+	
+DELETE ROLE(2)
+	1)  select role(s) from the list
+	2)  click the "Delete" button.  You will be prompted to continue.

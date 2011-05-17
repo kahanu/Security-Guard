@@ -1,0 +1,57 @@
+Membership Component Process
+
+CREATE USER	
+	1)  create user
+	2)  grant user to roles
+		-- select the roles to grant to the user(s)
+		-- click the "Grant" button to move them to the "Granted Roles" list
+	
+GRANT USER(S) TO ROLES	
+	1)  filter users in list on management view
+	2)  select users in list to be granted to the same roles
+	3)  click "Grant/Revoke Roles"
+	4)  redirect to the "Grant Users To Roles" view
+	5)  select the roles in the "List of Roles" list that ALL the users will be granted
+	6)  click the "Grant" button
+	
+REVOKE USERS(S) FROM ROLES
+	1)  filter users in list on management view
+	2)  select users in list to be granted to the same roles
+	3)  click "Grant/Revoke Roles"
+	4)  redirect to the "Grant Users To Roles" view
+	5)  selelct the roles in the "Granted Roles" list that will be revoked for the selected users.
+	6)  click the "Revoke" button
+	
+DELETE USERS
+To delete many users at a time:
+	1)  filter users in list on management view
+	2)  select the users in list to be deleted
+	3)  click the "Delete" button.  You will be prompted that all the users will be deleted. Click OK to execute.
+	
+APPROVE USERS
+This allows you to approve many users at a time.
+	1)  filter users in list on management view
+	2)  select the users to be approved or un-approved
+	3)  click the "Approve" button
+	
+LOCK/UNLOCK USERS
+This allows you to lock or unlock many users at a time.
+	1)  filter users in list on management view
+	2)  select the users in the list to lock or unlock
+	3)  click the "Lock" or "Unlock" button
+	
+VIEW USER
+	1)  filter users in list on management view
+	2)  select the single user you want to view
+	3)  click the user name to view the details
+	
+UPDATE USER DETAILS
+	1)  display the selected user details including roles
+	2)  modify the properties
+	3)  click the "Update" button
+		To update roles for user:
+			1) click the "Grant/Revoke" roles button
+	
+DELETE USER
+	1)  display the selected user details
+	2)  click the "Delete" button.  You will be prompted to continue.
