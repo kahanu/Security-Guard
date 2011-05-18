@@ -11,15 +11,16 @@ body
     color: #696969;
 }
 
-#wrapper {
-	min-width: 1000px;
-	min-height: 100%;
-	position: relative;
-	top: 0;
-	left: 0;
+#wrapper
+{
+    min-width: 1000px;
+    min-height: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
 }
 
-#header 
+#header
 {
     margin: 0 auto;
 }
