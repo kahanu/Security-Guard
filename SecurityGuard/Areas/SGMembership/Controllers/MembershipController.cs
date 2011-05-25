@@ -10,7 +10,7 @@ using SecurityGuard.Controllers;
 
 namespace SecurityGuard.Areas.SGMembership.Controllers
 {
-    [Authorize(Roles = "Administrators")]
+    [Authorize(Roles = "SecurityGuard")]
     public partial class MembershipController : BaseController
     {
 
@@ -19,17 +19,23 @@ namespace SecurityGuard.Areas.SGMembership.Controllers
         private IMembershipService membershipService;
         private readonly IRoleService roleService;
 
-        public MembershipController(IMembershipService membershipService, IRoleService roleService)
-        {
-            this.roleService = roleService;
-            this.membershipService = membershipService;
-        }
+        //public MembershipController(IMembershipService membershipService, IRoleService roleService)
+        //{
+        //    this.roleService = roleService;
+        //    this.membershipService = membershipService;
+        //}
+
+        //public MembershipController()
+        //    : this(new MembershipService(Membership.Provider),
+        //    new RoleService(Roles.Provider))
+        //{
+
+        //}
 
         public MembershipController()
-            : this(new MembershipService(Membership.Provider),
-            new RoleService(Roles.Provider))
         {
-
+            this.roleService = new RoleService(Roles.Provider);
+            this.membershipService = new MembershipService(Membership.Provider);
         }
 
         #endregion

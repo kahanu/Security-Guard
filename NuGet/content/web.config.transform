@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="SecurityGuardEmailFrom" value="info@email.net"/>
+    <add key="SecurityGuardEmailSubject" value="Your Password has been reset."/>
+    <add key="SecurityGuardEmailTemplatePath" value="~/MailerTemplates/ResetPassword.html"/>  
+  </appSettings>
+  <system.web>
+    <authentication mode="Forms">
+      <forms loginUrl="~/SGAccount/LogOn" timeout="2880" />
+    </authentication>
+  </system.web>
+  <system.net>
+    <mailSettings>
+      <smtp deliveryMethod="Network">
+        <network host="[your SMTP mail server]" userName="[your email address]" password="[your email password]" port="25"/>
+      </smtp>
+    </mailSettings>
+  </system.net>  
+</configuration>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <system.web>
+    <authentication mode="Forms">
+      <forms loginUrl="~/SGAccount/LogOn" timeout="2880" />
+    </authentication>
+  </system.web>
+</configuration>

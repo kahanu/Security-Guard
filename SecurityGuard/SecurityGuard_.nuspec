@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>SecurityGuard</id>
+    <version>0.9.27.503</version>
+    <authors>Gizmo Beach</authors>
+    <owners>Gizmo Beach</owners>
+    <licenseUrl>http://www.opensource.org/licenses/ms-pl</licenseUrl>
+    <projectUrl>https://github.com/kahanu/Security-Guard</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An easy-to-use management system for the ASP.NET Membership system built for ASP.NET MVC 3 applications.</description>
+    <tags>mvc asp.net membership security guard</tags>
+  </metadata>
+  <files>
+  	<file src="content\**\*.*" target="content" />
+  	<file src="bin\release\*" target="lib\net40" />
+  </files>
+</package>

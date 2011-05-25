@@ -22,6 +22,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SecurityGuardItems", "SecurityGuardItems", "{A7B00E5C-C3EA-49DE-BC65-371293F4B775}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcApplication4", "MvcApplication4\MvcApplication4.csproj", "{F9D05781-CF66-4550-97FD-6EEE8EB40160}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = SecurityGuard.vsmdi
@@ -47,6 +51,10 @@ Global
 		{8575033E-C5B3-416D-AC4E-C8D6300AA898}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8575033E-C5B3-416D-AC4E-C8D6300AA898}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8575033E-C5B3-416D-AC4E-C8D6300AA898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9D05781-CF66-4550-97FD-6EEE8EB40160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9D05781-CF66-4550-97FD-6EEE8EB40160}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9D05781-CF66-4550-97FD-6EEE8EB40160}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9D05781-CF66-4550-97FD-6EEE8EB40160}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +62,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D978B706-6E8C-45FF-969C-A81833F6B934} = {C38824DC-A3BE-43ED-96E3-DF53D1FB0392}
 		{F3151291-339A-4DC3-81AC-1D7837723003} = {C38824DC-A3BE-43ED-96E3-DF53D1FB0392}
+		{F9D05781-CF66-4550-97FD-6EEE8EB40160} = {C38824DC-A3BE-43ED-96E3-DF53D1FB0392}
 		{33F69F45-26FC-4B7E-A8DD-145403921D49} = {2769598F-AB85-4413-A4C4-5208628BA00E}
 		{8575033E-C5B3-416D-AC4E-C8D6300AA898} = {F3DB7541-6325-4E00-99FD-0D1A36322E34}
 		{CA2EA059-8FDB-4E88-B554-DFA6B604CEE7} = {F3DB7541-6325-4E00-99FD-0D1A36322E34}

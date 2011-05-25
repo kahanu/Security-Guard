@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Web.Mvc;
 using System.Web.Security;
+using MVCCentral.Framework;
+using SecurityGuard.Core;
 using SecurityGuard.Interfaces;
 using SecurityGuard.Services;
 using SecurityGuard.ViewModels;
@@ -15,17 +18,23 @@ namespace SecurityGuard.Controllers
         private IMembershipService membershipService;
         private IAuthenticationService authenticationService;
         
-        public SGAccountController(IMembershipService membershipService, IFormsAuthenticationService formsAuthenticationService)
-        {
-            this.authenticationService = new AuthenticationService(membershipService, formsAuthenticationService);
-            this.membershipService = membershipService;
-        }
+        //public SGAccountController(IMembershipService membershipService, IFormsAuthenticationService formsAuthenticationService)
+        //{
+        //    this.authenticationService = new AuthenticationService(membershipService, formsAuthenticationService);
+        //    this.membershipService = membershipService;
+        //}
+
+        //public SGAccountController()
+        //    : this(new MembershipService(Membership.Provider),
+        //    new FormsAuthenticationService())
+        //{
+
+        //}
 
         public SGAccountController()
-            : this(new MembershipService(Membership.Provider),
-            new FormsAuthenticationService())
         {
-
+            this.membershipService = new MembershipService(Membership.Provider);
+            this.authenticationService = new AuthenticationService(membershipService, new FormsAuthenticationService());
         }
 
         #endregion
@@ -107,9 +116,6 @@ namespace SecurityGuard.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/Register
-
         [HttpPost]
         public virtual ActionResult Register(RegisterViewModel model)
         {
@@ -137,7 +143,11 @@ namespace SecurityGuard.Controllers
         #endregion
 
         #region ChangePassword Methods
-
+        
+        /// <summary>
+        /// This allows the logged on user to change his password.
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         public virtual ActionResult ChangePassword()
         {
@@ -145,9 +155,6 @@ namespace SecurityGuard.Controllers
 
             return View(viewModel);
         }
-
-        //
-        // POST: /Account/ChangePassword
 
         [Authorize]
         [HttpPost]
@@ -180,7 +187,6 @@ namespace SecurityGuard.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            //return View(model);
             return RedirectToAction("ChangePassword");
         }
 
@@ -197,18 +203,64 @@ namespace SecurityGuard.Controllers
 
         #region Forgot Password Methods
 
+        /// <summary>
+        /// This allows the non-logged on user to have his password
+        /// reset and emailed to him.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ForgotPassword()
         {
-            
-            return View();
+            var viewModel = new ForgotPasswordViewModel()
+            {
+                RequiresQuestionAndAnswer = membershipService.RequiresQuestionAndAnswer
+            };
+            return View(viewModel);
         }
 
+        /// <summary>
+        /// Reset the password for the user and email it to him.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult ForgotPassword(string email)
+        public ActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
+            // Get the userName by the email address
+            string userName = membershipService.GetUserNameByEmail(model.Email);
 
+            // Get the user by the userName
+            MembershipUser user = membershipService.GetUser(userName);
+
+            // Now reset the password
+            string newPassword = string.Empty;
+
+            if (membershipService.RequiresQuestionAndAnswer)
+            {
+                newPassword = user.ResetPassword(model.PasswordAnswer);
+            }
+            else
+            {
+                newPassword = user.ResetPassword();
+            }
+
+            // Email the new pasword to the user
+            try
+            {
+                string body = BuildMessageBody(user.UserName, newPassword, ConfigSettings.SecurityGuardEmailTemplatePath);
+                Mail(model.Email, ConfigSettings.SecurityGuardEmailFrom, ConfigSettings.SecurityGuardEmailSubject, body, true);
+            }
+            catch (Exception)
+            {
+            }
+
+            return RedirectToAction("ForgotPasswordSuccess");
+        }
+
+        public ActionResult ForgotPasswordSuccess()
+        {
             return View();
         }
+
 
         #endregion
 
@@ -250,6 +302,59 @@ namespace SecurityGuard.Controllers
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
         }
+        #endregion
+
+        #region Mailer Helpers
+
+        /// <summary>
+        /// This method encapsulates the email function.
+        /// </summary>
+        /// <param name="emailTo"></param>
+        /// <param name="emailFrom"></param>
+        /// <param name="subject"></param>
+        /// <param name="body"></param>
+        /// <param name="isHtml"></param>
+        private void Mail(string emailTo, string emailFrom, string subject, string body, bool isHtml)
+        {
+            Email email = new Email();
+            email.ToList = emailTo;
+            email.FromEmail = emailFrom;
+            email.Subject = subject;
+            email.MessageBody = body;
+            email.isHTML = isHtml;
+            
+            email.SendEmail(email);
+
+        }
+
+        /// <summary>
+        /// This function builds the email message body from the ResetPassword.html file.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        private string BuildMessageBody(string userName, string password, string filePath)
+        {
+            string body = string.Empty;
+
+            FileInfo fi = new FileInfo(Server.MapPath(filePath));
+            string text = string.Empty;
+
+            if (fi.Exists)
+            {
+                using (StreamReader sr = fi.OpenText())
+                {
+                    text = sr.ReadToEnd();
+                }
+                text = text.Replace("%UserName%", userName);
+                text = text.Replace("%Password%", password);
+            }
+            body = text;
+
+            return body;
+        }
+
         #endregion
     }
 }

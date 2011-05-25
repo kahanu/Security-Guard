@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MVCCentral.Framework">
+      <HintPath>..\..\MVCCentral.Framework\MVCCentral.Framework\bin\Release\MVCCentral.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -54,6 +57,7 @@
     <Compile Include="Areas\SGMembership\SGMembershipAreaRegistration.cs" />
     <Compile Include="Controllers\SGAccountController.cs" />
     <Compile Include="Core\Attributes\MultiButtonFormSubmitAttribute.cs" />
+    <Compile Include="Core\ConfigSettings.cs" />
     <Compile Include="Core\HtmlHelpers\UIHelpers.cs" />
     <Compile Include="Core\RouteHelpers\Actions.cs" />
     <Compile Include="Core\RouteHelpers\Area.cs" />

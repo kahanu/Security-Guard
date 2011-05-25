@@ -1,0 +1,38 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+    <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
+    <script src="<%: Url.Content("~/Scripts/jquery-1.5.1.min.js") %>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/modernizr-1.7.min.js") %>" type="text/javascript"></script>
+</head>
+<body>
+    <div class="page">
+        <header>
+            <div id="title">
+                <h1>My MVC Application</h1>
+            </div>
+            <div id="logindisplay">
+                <% Html.RenderPartial("LogOnUserControl"); %>
+            </div>
+            <nav>
+                <ul id="menu">
+                    <li><%: Html.ActionLink("Home", "Index", "Home")%></li>
+                    <li><%: Html.ActionLink("About", "About", "Home")%></li>
+                    <% if (Page.User.IsInRole("SecurityGuard"))
+                       {%>
+                           <li><%: Html.ActionLink("Security Guard", "Index", "Dashboard", new{ area = "SGMembership" }, null) %></li>
+                       <%} %>
+                </ul>
+            </nav>
+        </header>
+        <section id="main">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            <footer>
+            </footer>
+        </section>
+    </div>
+</body>
+</html>

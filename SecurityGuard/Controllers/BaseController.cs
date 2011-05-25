@@ -18,8 +18,16 @@ namespace SecurityGuard.Controllers
         {
             if (filterContext.Result is RedirectToRouteResult)
             {
-                // put the ModelState into TempData
-                TempData.Add("_MODELSTATE", ModelState);
+                try
+                {
+                    // put the ModelState into TempData
+                    TempData.Add("_MODELSTATE", ModelState);
+                }
+                catch (Exception)
+                {
+                    TempData.Clear();
+                    // swallow exception
+                }
             }
             else if (filterContext.Result is ViewResult && TempData.ContainsKey("_MODELSTATE"))
             {

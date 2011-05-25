@@ -10,7 +10,7 @@ using SecurityGuard.Controllers;
 
 namespace SecurityGuard.Areas.SGMembership.Controllers
 {
-    [Authorize(Roles="Administrators")]
+    [Authorize(Roles="SecurityGuard")]
     public partial class RoleController : BaseController
     {
 
@@ -18,15 +18,20 @@ namespace SecurityGuard.Areas.SGMembership.Controllers
 
         private readonly IRoleService roleService;
 
-        public RoleController(IRoleService roleService)
-        {
-            this.roleService = roleService;
-        }
+        //public RoleController(IRoleService roleService)
+        //{
+        //    this.roleService = roleService;
+        //}
+
+        //public RoleController()
+        //    : this(new RoleService(Roles.Provider))
+        //{
+
+        //}
 
         public RoleController()
-            : this(new RoleService(Roles.Provider))
         {
-
+            this.roleService = new RoleService(Roles.Provider);
         }
 
         #endregion
