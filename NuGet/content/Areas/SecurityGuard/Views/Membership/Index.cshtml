@@ -1,0 +1,141 @@
+@model SecurityGuard.ViewModels.ManageUsersViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/SecurityGuard/Views/Shared/_SecurityGuardLayoutPage.cshtml";
+}
+<div id="breadcrumb">
+    @Html.ActionLink("Dashboard", "Index", "Dashboard") > Manage Users
+</div>
+<h2>
+    Manage Users</h2>
+<p>
+    To Grant a user to Roles, click a radio button next to the user name then click
+    the &quot;Grant Roles To User&quot; link.</p>
+<p>@Html.ActionLink("Create User", "CreateUser", "Membership", new { area = "SecurityGuard" }, null)
+    | @Html.ActionLink("Grant Roles to User", "GrantRolesToUser", "Membership", new { area = "SecurityGuard" }, new { id = "grant-roles-to-user" })</p>
+@using (Html.BeginForm())
+{
+    <select id="filterby" name="filterby">
+        <option value="username">UserName</option>
+        <option value="email">Email</option>
+    </select>
+    <text>&nbsp;Starts with:</text> @Html.TextBox("searchterm") 
+
+    <input type="submit" id="filter-button" value="Search" />
+
+}
+<br />
+@if (Model.Users != null)
+{
+    if (Model.Users.Count == 0)
+    {
+    <p>
+        No users for this search.</p>
+    }
+    else
+    {
+    <text>Records: @Model.Users.Count.ToString()</text>
+    <div class="section_inner">
+        <div class="table_wrapper">
+            <div class="table_wrapper_inner">
+                <table cellpadding="0" cellspacing="0" width="100%">
+                    <tbody>
+                        <tr>
+                            <th>
+                            </th>
+                            <th>
+                                UserName
+                            </th>
+                            <th>
+                                Is Approved?
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Last Activity
+                            </th>
+                        </tr>
+                        @foreach (MembershipUser item in Model.Users)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="radio" name="userName" value="@item.UserName" class="userRadio" />
+                                </td>
+                                <td>@Html.ActionLink(item.UserName, "Update", "Membership", new { userName = item.UserName }, null)
+                                </td>
+                                <td>
+                                    @if (item.IsApproved)
+                                    {
+                                        <text><span class="system positive">Approved</span></text>
+                                    }
+                                    else
+                                    {
+                                        <text><span class="system negative">Not Approved</span></text>   
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.IsLockedOut)
+                                    {
+                                        <text><span class="system negative">Locked</span></text>
+                                    }
+                                    else
+                                    {
+                                        <text><span class="system positive">Unlocked</span></text>
+                                    }
+                                </td>
+                                <td>
+                                    @item.Email
+                                </td>
+                                <td>@string.Format("{0:g}", item.LastActivityDate)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    }
+}
+<script type="text/javascript">
+
+    $(function () {
+
+        /**************************************************
+        * Begin Radio Button functions
+        *
+        * This captures radio button event clicks and 
+        * enables the "Grant Roles To User" link.
+        **************************************************/
+        var anchor = $("a#grant-roles-to-user");
+        anchor.attr("disabled", "disabled");
+
+        $(".userRadio").click(function () {
+            // Get the value of the clicked radio button
+            // which is the username.
+            var userName = $(this).val();
+
+            // Get a reference to the "href" of the link.
+            var href = anchor.attr("href");
+
+            // Concatenate the existing href value with the username
+            var newHref = href + "/" + userName;
+
+            // Replace the existing href value with the new one
+            anchor.attr("href", newHref);
+
+            // Remove the disabled attribute on the 
+            // Grant Roles to User link
+            anchor.removeAttr("disabled");
+        });
+
+        /**************************************************
+        * End Radio Button functions
+        **************************************************/
+    });
+
+</script>

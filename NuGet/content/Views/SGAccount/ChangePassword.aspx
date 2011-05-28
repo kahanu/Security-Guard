@@ -11,10 +11,14 @@
 <p>
     Use the form below to change your password.
 </p>
-<p>
-    New passwords are required to be a minimum of <%: Membership.MinRequiredPasswordLength %>
-    characters in length.
-</p>
+<p>Password Requirements:</p>
+<ul>
+    <li>To be a minimum of @Membership.MinRequiredPasswordLength characters in length.</li>
+    <% if (Membership.MinRequiredNonAlphanumericCharacters > 0)
+    {%>
+        <li>To have a minimum of @Membership.MinRequiredNonAlphanumericCharacters non-alpha numeric characters included, such as &quot;<span style="font-family: Courier New; font-size: 16px;">(){}-_*&^%$#@@!</span>&quot;.</li>
+    <%}%>
+</ul>
 
 <script src="<%: Url.Content("~/Content/SecurityGuard/scripts/jquery-1.6.1.min.js") %>" type="text/javascript"></script>
 <script src="<%: Url.Content("~/Content/SecurityGuard/scripts/modernizr-1.7.min.js") %>" type="text/javascript"></script>
