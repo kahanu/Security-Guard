@@ -53,22 +53,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Areas\SGMembership\SGMembershipAreaRegistration.cs" />
-    <Compile Include="Controllers\SGAccountController.cs" />
     <Compile Include="Core\Attributes\MultiButtonFormSubmitAttribute.cs" />
     <Compile Include="Core\ConfigSettings.cs" />
     <Compile Include="Core\HtmlHelpers\UIHelpers.cs" />
     <Compile Include="Core\RouteHelpers\Actions.cs" />
     <Compile Include="Core\RouteHelpers\Area.cs" />
-    <Compile Include="Areas\SGMembership\Controllers\DashboardController.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />
     <Compile Include="Interfaces\IFormsAuthenticationService.cs" />
     <Compile Include="Interfaces\IMembershipService.cs" />
     <Compile Include="Interfaces\IProfileService.cs" />
     <Compile Include="Interfaces\IRoleService.cs" />
-    <Compile Include="Areas\SGMembership\Controllers\MembershipController.cs" />
-    <Compile Include="Areas\SGMembership\Controllers\RoleController.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\FormsAuthenticationService.cs" />
     <Compile Include="Services\MembershipService.cs" />
@@ -89,7 +83,10 @@
     <Compile Include="ViewModels\SelectObject.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Areas\SGMembership\Controllers\" />
+    <Folder Include="Controllers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

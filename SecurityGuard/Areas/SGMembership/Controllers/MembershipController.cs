@@ -19,19 +19,6 @@ namespace SecurityGuard.Areas.SGMembership.Controllers
         private IMembershipService membershipService;
         private readonly IRoleService roleService;
 
-        //public MembershipController(IMembershipService membershipService, IRoleService roleService)
-        //{
-        //    this.roleService = roleService;
-        //    this.membershipService = membershipService;
-        //}
-
-        //public MembershipController()
-        //    : this(new MembershipService(Membership.Provider),
-        //    new RoleService(Roles.Provider))
-        //{
-
-        //}
-
         public MembershipController()
         {
             this.roleService = new RoleService(Roles.Provider);

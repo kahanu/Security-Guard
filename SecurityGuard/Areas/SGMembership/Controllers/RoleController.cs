@@ -18,26 +18,12 @@ namespace SecurityGuard.Areas.SGMembership.Controllers
 
         private readonly IRoleService roleService;
 
-        //public RoleController(IRoleService roleService)
-        //{
-        //    this.roleService = roleService;
-        //}
-
-        //public RoleController()
-        //    : this(new RoleService(Roles.Provider))
-        //{
-
-        //}
-
         public RoleController()
         {
             this.roleService = new RoleService(Roles.Provider);
         }
 
         #endregion
-
-        //
-        // GET: /SGMembership/Role/
 
         public virtual ActionResult Index()
         {

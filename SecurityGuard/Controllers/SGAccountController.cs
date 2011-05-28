@@ -10,6 +10,11 @@ using SecurityGuard.ViewModels;
 
 namespace SecurityGuard.Controllers
 {
+    /// <summary>
+    /// This class handles all the normal logon, logoff, 
+    /// register, change password, and forgot password operations
+    /// that occur in the public part of your web application.
+    /// </summary>
     public class SGAccountController : BaseController
     {
                 
@@ -17,19 +22,6 @@ namespace SecurityGuard.Controllers
 
         private IMembershipService membershipService;
         private IAuthenticationService authenticationService;
-        
-        //public SGAccountController(IMembershipService membershipService, IFormsAuthenticationService formsAuthenticationService)
-        //{
-        //    this.authenticationService = new AuthenticationService(membershipService, formsAuthenticationService);
-        //    this.membershipService = membershipService;
-        //}
-
-        //public SGAccountController()
-        //    : this(new MembershipService(Membership.Provider),
-        //    new FormsAuthenticationService())
-        //{
-
-        //}
 
         public SGAccountController()
         {
@@ -38,7 +30,6 @@ namespace SecurityGuard.Controllers
         }
 
         #endregion
-
 
         public virtual ActionResult Index()
         {

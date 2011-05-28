@@ -16,19 +16,6 @@ namespace SecurityGuard.Areas.SGMembership.Controllers
         private IMembershipService membershipService;
         private IRoleService roleService;
 
-        //public DashboardController(IMembershipService membershipService, IRoleService roleService)
-        //{
-        //    this.roleService = roleService;
-        //    this.membershipService = membershipService;
-        //}
-
-        //public DashboardController()
-        //    : this(new MembershipService(Membership.Provider),
-        //    new RoleService(Roles.Provider))
-        //{
-
-        //}
-
         public DashboardController()
         {
             this.roleService = new RoleService(Roles.Provider);
@@ -37,8 +24,6 @@ namespace SecurityGuard.Areas.SGMembership.Controllers
 
         #endregion
 
-        //
-        // GET: /SecurityGuard/Dashboard/
 
         public virtual ActionResult Index()
         {
