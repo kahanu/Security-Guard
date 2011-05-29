@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>SecurityGuard</id>
-    <version>1.0.41.535</version>
+    <version>1.0.44.536</version>
     <authors>Gizmo Beach</authors>
     <owners>Gizmo Beach</owners>
     <licenseUrl>http://www.opensource.org/licenses/ms-pl</licenseUrl>

@@ -1,10 +1,8 @@
-﻿using SecurityGuard.ViewModels;
-
-namespace SecurityGuard.Interfaces
+﻿namespace SecurityGuard.Interfaces
 {
     public interface IAuthenticationService
     {
-        bool LogOn(LogOnViewModel model);
+        bool LogOn(string userName, string password, bool rememberMe);
         void LogOff();
     }
 }

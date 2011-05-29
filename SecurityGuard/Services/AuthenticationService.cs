@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.Security;
 using SecurityGuard.Interfaces;
-using SecurityGuard.ViewModels;
 
 namespace SecurityGuard.Services
 {
@@ -23,11 +22,11 @@ namespace SecurityGuard.Services
 
         #region IAuthenticationService Members
 
-        public bool LogOn(LogOnViewModel model)
+        public bool LogOn(string userName, string password, bool rememberMe)
         {
-            if (membershipService.ValidateUser(model.UserName, model.Password))
+            if (membershipService.ValidateUser(userName, password))
             {
-                formsAuthenticationService.SetAuthCookie(model.UserName, model.RememberMe);
+                formsAuthenticationService.SetAuthCookie(userName, rememberMe);
                 return true;
             }
 

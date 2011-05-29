@@ -53,7 +53,7 @@ namespace $rootnamespace$.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (authenticationService.LogOn(model))
+                if (authenticationService.LogOn(model.UserName, model.Password, model.RememberMe))
                 {
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
