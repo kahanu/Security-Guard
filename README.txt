@@ -1,10 +1,7 @@
-May 17, 2011
+May 28, 2011
 
 By King Wilder
 
-Security Guard
-The ASP.NET MVC 3 Membership Management system that will be deployable via NuGet.
-
-This is the first commit, so not much information yet.  I'll be updating it shortly.
+For information on this easy-to-use ASP.NET Membership management system, check out the wiki.
 
 King Wilder
