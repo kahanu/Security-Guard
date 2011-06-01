@@ -27,7 +27,7 @@
             <label>@Html.LabelFor(model => model.UserName)</label>
             <div class="inputs">
                 <span class="input_wrapper">@Html.TextBoxFor(model => model.UserName, new { @class = "text" })</span>
-                <span class="system negative">@Html.ValidationMessageFor(model => model.UserName)</span>
+                <span class="system negative" id="username-message">@Html.ValidationMessageFor(model => model.UserName)</span>
             </div>
         </div>
 
@@ -93,3 +93,41 @@
 <div>
     @Html.ActionLink("Back to Manage Users", "Index")
 </div>
+
+
+<script type="text/javascript">
+
+    $(function () {
+
+        var msg = $("#username-message");
+        $("#UserName").blur(function () {
+
+            var username = $(this).val();
+
+            if (username.length == 0) {
+                alert("No username.");
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("CheckForUniqueUser", "Membership")',
+                dataType: 'json',
+                type: 'GET',
+                data: { userName: username },
+                success: OnCheckForUniqueUserSuccess,
+                error: OnCheckForUniqueUserError
+            });
+        });
+
+        function OnCheckForUniqueUserSuccess(data) {
+            if (data.Exists) {
+                msg.text("This username already exists.  Please enter a new one.");
+            }
+        }
+
+        function OnCheckForUniqueUserError(xhr, status, error) {
+            msg.text("There was an error checking uniqueness.");
+        }
+    });
+
+</script>

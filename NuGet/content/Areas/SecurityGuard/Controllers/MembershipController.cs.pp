@@ -76,6 +76,22 @@ namespace $rootnamespace$.Areas.SecurityGuard.Controllers
             return Actions.GrantRolesToUser(user.UserName);
         }
 
+        /// <summary>
+        /// An Ajax method to check if a username is unique.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CheckForUniqueUser(string userName)
+        {
+            MembershipUser user = membershipService.GetUser(userName);
+            JsonResponse response = new JsonResponse();
+            response.Exists = (user == null) ? false : true;
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+
         #endregion
 
         #region Delete User Methods
