@@ -68,17 +68,24 @@ namespace $rootnamespace$.Controllers
                 else
                 {
                     MembershipUser user = membershipService.GetUser(model.UserName);
-                    if (!user.IsApproved)
+                    if (user == null)
                     {
-                        ModelState.AddModelError("", "Your account has not been approved yet.");
-                    }
-                    else if (user.IsLockedOut)
-                    {
-                        ModelState.AddModelError("", "Your account is currently locked.");
+                        ModelState.AddModelError("", "This account does not exist. Please try again.");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                        if (!user.IsApproved)
+                        {
+                            ModelState.AddModelError("", "Your account has not been approved yet.");
+                        }
+                        else if (user.IsLockedOut)
+                        {
+                            ModelState.AddModelError("", "Your account is currently locked.");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                        }
                     }
                 }
             }

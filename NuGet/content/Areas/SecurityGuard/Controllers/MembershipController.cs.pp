@@ -70,15 +70,8 @@ namespace $rootnamespace$.Areas.SecurityGuard.Controllers
         public virtual ActionResult CreateUser(RegisterViewModel model)
         {
             MembershipUser user;
-            if (model.RequireSecretQuestionAndAnswer)
-            {
-                MembershipCreateStatus status;
-                user = membershipService.CreateUser(model.UserName, model.Password, model.Email, model.SecretQuestion, model.SecretAnswer, model.Approve, out status);
-            }
-            else
-            {
-                user = membershipService.CreateUser(model.UserName, model.Password, model.Email);
-            }
+            MembershipCreateStatus status;
+            user = membershipService.CreateUser(model.UserName, model.Password, model.Email, model.SecretQuestion, model.SecretAnswer, model.Approve, out status);
 
             return Actions.GrantRolesToUser(user.UserName);
         }
