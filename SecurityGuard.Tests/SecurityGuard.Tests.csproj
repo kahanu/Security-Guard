@@ -38,11 +38,13 @@
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -54,6 +56,45 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AuthenticationServiceTests.cs" />
     <Compile Include="RoleServiceTests.cs" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DashboardViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\ForgotPasswordViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\GrantRolesToUserViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\JsonResponse.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\LogOnViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\ManageRolesViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\ManageUsersViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\RegisterViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\ResponseItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\RoleViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\SelectObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\UserViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SecurityGuard\SecurityGuard.csproj">

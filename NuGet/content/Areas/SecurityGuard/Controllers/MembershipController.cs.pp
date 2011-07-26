@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using SecurityGuard.Services;
 using SecurityGuard.Core.Attributes;
-using SecurityGuard.Core.RouteHelpers;
+using routeHelpers = SecurityGuard.Core.RouteHelpers;
 using SecurityGuard.Interfaces;
 using SecurityGuard.ViewModels;
 using $rootnamespace$.Controllers;
@@ -73,7 +73,7 @@ namespace $rootnamespace$.Areas.SecurityGuard.Controllers
             MembershipCreateStatus status;
             user = membershipService.CreateUser(model.UserName, model.Password, model.Email, model.SecretQuestion, model.SecretAnswer, model.Approve, out status);
 
-            return Actions.GrantRolesToUser(user.UserName);
+            return routeHelpers.Actions.GrantRolesToUser(user.UserName);
         }
 
         /// <summary>

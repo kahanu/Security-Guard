@@ -74,7 +74,7 @@ namespace SecurityGuard.Tests
             model.RememberMe = true;
 
             // Act
-            var result = _authenticationService.Object.LogOn(model);
+            var result = _authenticationService.Object.LogOn(model.UserName, model.Password, model.RememberMe);
 
             // Assert
             Assert.IsTrue(result);

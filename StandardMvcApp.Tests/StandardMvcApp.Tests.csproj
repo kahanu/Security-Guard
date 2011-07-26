@@ -64,10 +64,6 @@
       <Project>{33F69F45-26FC-4B7E-A8DD-145403921D49}</Project>
       <Name>SecurityGuard</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StandardMvcApp\StandardMvcApp.csproj">
-      <Project>{D978B706-6E8C-45FF-969C-A81833F6B934}</Project>
-      <Name>StandardMvcApp</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
