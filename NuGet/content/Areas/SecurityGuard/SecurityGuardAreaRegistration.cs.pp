@@ -16,7 +16,7 @@ namespace $rootnamespace$.Areas.SecurityGuard
         {
 
             context.MapRoute("SearchMembership", "SecurityGuard/Membership/index/{searchterm}/{filterby}",
-                new { controller = "Membership", action = "Index", searchterm = UrlParameter.Optional, filterby = UrlParameter.Optional }
+                new { controller = "Membership", action = "Index", searchterm = UrlParameter.Optional, filterby = "all" }
                 );
 
             context.MapRoute("Membership", "SecurityGuard/Membership/{action}/{userName}",
