@@ -7,6 +7,7 @@ using SecurityGuard.Core;
 using SecurityGuard.Interfaces;
 using SecurityGuard.Services;
 using SecurityGuard.ViewModels;
+using viewModels = $rootnamespace$.Areas.SecurityGuard.ViewModels;
 
 namespace $rootnamespace$.Controllers
 {
@@ -107,7 +108,7 @@ namespace $rootnamespace$.Controllers
 
         public virtual ActionResult Register()
         {
-            var model = new RegisterViewModel()
+            var model = new viewModels.RegisterViewModel()
             {
                 RequireSecretQuestionAndAnswer = membershipService.RequiresQuestionAndAnswer
             };
@@ -115,7 +116,7 @@ namespace $rootnamespace$.Controllers
         }
 
         [HttpPost]
-        public virtual ActionResult Register(RegisterViewModel model)
+        public virtual ActionResult Register(viewModels.RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {

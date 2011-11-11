@@ -8,6 +8,7 @@ using routeHelpers = SecurityGuard.Core.RouteHelpers;
 using SecurityGuard.Interfaces;
 using SecurityGuard.ViewModels;
 using $rootnamespace$.Controllers;
+using viewModels = $rootnamespace$.Areas.SecurityGuard.ViewModels;
 
 namespace $rootnamespace$.Areas.SecurityGuard.Controllers
 {
@@ -72,7 +73,7 @@ namespace $rootnamespace$.Areas.SecurityGuard.Controllers
 
         public virtual ActionResult CreateUser()
         {
-            var model = new RegisterViewModel()
+            var model = new viewModels.RegisterViewModel()
             {
                 RequireSecretQuestionAndAnswer = membershipService.RequiresQuestionAndAnswer
             };
@@ -85,7 +86,7 @@ namespace $rootnamespace$.Areas.SecurityGuard.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public virtual ActionResult CreateUser(RegisterViewModel model)
+        public virtual ActionResult CreateUser(viewModels.RegisterViewModel model)
         {
             MembershipUser user;
             MembershipCreateStatus status;
