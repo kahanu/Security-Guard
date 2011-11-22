@@ -69,36 +69,38 @@
     <Compile Include="Areas\SecurityGuard\Controllers\MembershipController.cs" />
     <Compile Include="Areas\SecurityGuard\Controllers\RoleController.cs" />
     <Compile Include="Areas\SecurityGuard\SecurityGuardAreaRegistration.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SGAccountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\ChangePasswordViewModel.cs" />
-    <Compile Include="Models\DashboardViewModel.cs" />
-    <Compile Include="Models\ForgotPasswordViewModel.cs" />
-    <Compile Include="Models\GrantRolesToUserViewModel.cs" />
-    <Compile Include="Models\JsonResponse.cs" />
+    <Compile Include="Areas\SecurityGuard\Models\ChangePasswordViewModel.cs" />
+    <Compile Include="Areas\SecurityGuard\Models\DashboardViewModel.cs" />
+    <Compile Include="Areas\SecurityGuard\Models\ForgotPasswordViewModel.cs" />
+    <Compile Include="Areas\SecurityGuard\Models\GrantRolesToUserViewModel.cs" />
+    <Compile Include="Areas\SecurityGuard\Models\JsonResponse.cs" />
+    <Compile Include="Areas\SecurityGuard\Models\ManageRolesViewModel.cs" />
+    <Compile Include="Areas\SecurityGuard\Models\ManageUsersViewModel.cs" />
+    <Compile Include="Areas\SecurityGuard\Models\RegisterViewModel.cs" />
+    <Compile Include="Areas\SecurityGuard\Models\ResponseItem.cs" />
+    <Compile Include="Areas\SecurityGuard\Models\RoleViewModel.cs" />
+    <Compile Include="Areas\SecurityGuard\Models\SelectObject.cs" />
+    <Compile Include="Areas\SecurityGuard\Models\UserViewModel.cs" />
     <Compile Include="Models\LogOnViewModel.cs" />
-    <Compile Include="Models\ManageRolesViewModel.cs" />
-    <Compile Include="Models\ManageUsersViewModel.cs" />
-    <Compile Include="Models\RegisterViewModel.cs" />
-    <Compile Include="Models\ResponseItem.cs" />
-    <Compile Include="Models\RoleViewModel.cs" />
-    <Compile Include="Models\SelectObject.cs" />
-    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\SecurityGuard\images\blue_ico.png" />
     <Content Include="Content\SecurityGuard\images\blue_message.gif" />
+    <Content Include="Content\SecurityGuard\images\go.gif" />
     <Content Include="Content\SecurityGuard\images\green_ico.png" />
     <Content Include="Content\SecurityGuard\images\green_message.gif" />
     <Content Include="Content\SecurityGuard\images\negative.gif" />
+    <Content Include="Content\SecurityGuard\images\next.gif" />
+    <Content Include="Content\SecurityGuard\images\pag_bg.gif" />
     <Content Include="Content\SecurityGuard\images\positive.gif" />
+    <Content Include="Content\SecurityGuard\images\prev.gif" />
     <Content Include="Content\SecurityGuard\images\red_ico.png" />
     <Content Include="Content\SecurityGuard\images\red_message.gif" />
     <Content Include="Content\SecurityGuard\images\td_bg1.gif" />
@@ -107,6 +109,7 @@
     <Content Include="Content\SecurityGuard\images\white_message.gif" />
     <Content Include="Content\SecurityGuard\images\yellow_ico.png" />
     <Content Include="Content\SecurityGuard\images\yellow_message.gif" />
+    <Content Include="Content\SecurityGuard\pagination.css" />
     <Content Include="Content\SecurityGuard\scripts\jquery-1.6.1.min.js" />
     <Content Include="Content\SecurityGuard\scripts\jquery.jqia.selects.js" />
     <Content Include="Content\SecurityGuard\scripts\jquery.validate.min.js" />
@@ -173,10 +176,6 @@
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Account\ChangePassword.cshtml" />
-    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
-    <Content Include="Views\Account\LogOn.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -186,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

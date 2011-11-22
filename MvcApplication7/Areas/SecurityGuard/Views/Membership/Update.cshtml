@@ -1,0 +1,283 @@
+@model SecurityGuard.ViewModels.UserViewModel
+@{
+    ViewBag.Title = "UserDetails";
+    Layout = "~/Areas/SecurityGuard/Views/Shared/_SecurityGuardLayoutPage.cshtml";
+}
+<div id="breadcrumb">
+    @Html.ActionLink("Dashboard", "Index", "Dashboard") >
+    @Html.ActionLink("Manage Users", "Index", "Membership") > User Details
+</div>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+<h2>
+    User Details</h2>
+@{
+    if (TempData.Keys.Contains("SuccessMessage"))
+    {
+    <ul class="system_messages">
+        <li class="green"><span class="ico"></span><strong class="system_title">@TempData["SuccessMessage"]</strong></li>
+    </ul>
+
+    }
+    else if (TempData.Keys.Contains("ErrorMessage"))
+    {
+    <ul class="system_messages">
+        <li class="red"><span class="ico"></span><strong class="system_title">@TempData["ErrorMessage"]</strong></li>
+    </ul>
+        
+    }
+}
+@using (Html.BeginForm("UpdateDeleteCancel", "Membership", new { userName = @Model.User.UserName }, FormMethod.Post, new { id = "user-form" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <div class="row">
+            <label>@Html.LabelFor(model => model.User.UserName)</label>
+            <div class="inputs">
+                <span class="input_wrapper">@Model.User.UserName</span>
+            </div>
+        </div>
+        <div class="row">
+            <label>@Html.LabelFor(model => model.User.Email)</label>
+            <div class="inputs">
+                <span class="input_wrapper">@Html.TextBoxFor(model => model.User.Email, new { @class = "text" })</span>
+                <span class="system">@Html.ValidationMessageFor(model => model.User.Email)</span>
+            </div>
+        </div>
+        <div class="row">
+            <label>@Html.LabelFor(model => model.User.Comment)</label>
+            <div class="inputs">
+                <span class="input_wrapper textarea_wrapper">
+                    @Html.TextAreaFor(model => model.User.Comment, new { @class = "text" })
+                </span><span class="system">@Html.ValidationMessageFor(model => model.User.Comment)</span>
+            </div>
+        </div>
+        <div class="row">
+            <label>@Html.LabelFor(model => model.User.IsApproved, "Is Approved")</label>
+            <div class="inputs">
+                <span class="input_wrapper">
+                    @{
+    string btnLblApprove = "";
+    string cssClass = "";
+    if (Model.User.IsApproved)
+    {
+        btnLblApprove = "Deny";
+        cssClass = "positive";
+    }
+    else
+    {
+        btnLblApprove = "Approve";
+        cssClass = "negative";
+    }
+                        <text><span id="approve-deny-div" class="system @cssClass">@(Model.User.IsApproved ? "Approved" : "Not Approved")</span></text>
+                        <text>&nbsp;- <a id="btn-approve" href="#">@btnLblApprove</a></text>
+                    }
+                </span><span class="system" id="approve-message"></span>
+            </div>
+        </div>
+        <div class="row">
+            <label>@Html.LabelFor(model => model.User.IsLockedOut, "Is Locked Out")</label>
+            <div class="inputs">
+                <span class="input_wrapper">
+                    @{
+                    
+    if (Model.User.IsLockedOut)
+    {
+        cssClass = "negative";
+    }
+    else
+    {
+        cssClass = "positive";
+    }
+                        <text><span id="locked-unlocked-div" class="system @cssClass">@(Model.User.IsLockedOut ? "Locked" : "Unlocked")</span> </text>
+                        if (Model.User.IsLockedOut)
+                        { 
+                            <span id="unlock-span">&nbsp;- <a id="btn-lock" href="#">Unlock</a></span>    
+                        }
+                    }
+                </span><span class="system" id="lock-message"></span>
+            </div>
+        </div>
+        <div class="row">
+            <label>@Html.LabelFor(model => model.User.IsOnline, "Is Online")</label>
+            <div class="inputs">
+                <span class="input_wrapper">
+                    @{
+    if (Model.User.IsOnline)
+    {
+                        <text>Online</text>
+    }
+    else
+    {
+                        <text>Off-line</text>
+    }
+                    }
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <label>@Html.LabelFor(model => model.User.LastActivityDate, "Last Activity Date")</label>
+            <div class="inputs">
+                <span class="input_wrapper">@Model.User.LastActivityDate</span>
+            </div>
+        </div>
+        <div class="row">
+            <label>@Html.LabelFor(model => model.User.LastLockoutDate, "Last Lockout Date")</label>
+            <div class="inputs">
+                <span class="input_wrapper">@Model.User.LastLockoutDate</span>
+            </div>
+        </div>
+        <div class="row">
+            <label>@Html.LabelFor(model => model.User.LastLoginDate, "Last Login Date")</label>
+            <div class="inputs">
+                <span class="input_wrapper">@Model.User.LastLoginDate</span>
+            </div>
+        </div>
+        <div class="row">
+            <label>
+                Last Password
+                <br />
+                Changed Date</label>
+            <div class="inputs">
+                <span class="input_wrapper">@Model.User.LastPasswordChangedDate</span>
+            </div>
+        </div>
+        @if (@Model.RequiresSecretQuestionAndAnswer)
+        {
+            <div class="row">
+                <label>@Html.LabelFor(model => model.User.PasswordQuestion, "Password Question")</label>
+                <div class="inputs">
+                    <span class="input_wrapper">@Model.User.PasswordQuestion</span>
+                </div>
+            </div>
+        }
+        <fieldset>
+            <legend>Roles for @Model.User.UserName (@Html.ActionLink("Edit", "GrantRolesToUser", "Membership", new { userName = @Model.User.UserName }, null))</legend>
+            <ul>
+                @foreach (var role in @Model.Roles)
+                {
+                    <li>@role</li>
+                }
+            </ul>
+        </fieldset>
+        @Html.HiddenFor(model => model.User.UserName)
+        @Html.HiddenFor(model => model.User.ProviderUserKey)
+        <p style="text-align: right;">
+            <input type="submit" value="Cancel" name="UserCancel" />&nbsp;
+            <input type="submit" value="Delete" name="DeleteUser" id="DeleteUser" />&nbsp;
+            <input type="submit" value="Update" name="UpdateUser" />&nbsp;
+        </p>
+    </fieldset>
+    
+}
+<script type="text/javascript">
+
+    $(function () {
+
+
+        $("#DeleteUser").click(function () {
+            if (confirm("Are you sure you want to delete this user?  This will delete the user and any granted roles.")) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+
+
+        /*****************************************************
+        * Begin Approve/Deny functions
+        *****************************************************/
+        var approveMsg = $("#approve-message");
+        $("#btn-approve").click(function () {
+            var userName = $("#User_UserName");
+
+            $.ajax({
+                url: '@Url.Action("ApproveDeny", "Membership")',
+                dataType: 'json',
+                type: 'POST',
+                data: { userName: userName.val() },
+                success: OnApproveDenySuccess,
+                error: OnApproveDenyError
+            });
+        });
+
+        function OnApproveDenySuccess(data) {
+            if (data.Success) {
+                approveMsg.text(data.Message).addClass("positive").show().delay(3000).fadeOut();
+                if (data.Approved) {
+                    $("#btn-approve").text("Deny");
+                    $("#approve-deny-div").text("Approved").addClass("system").addClass("positive").removeClass("negative");
+                } else {
+                    $("#btn-approve").text("Approve");
+                    $("#approve-deny-div").text("Not Approved").addClass("system").addClass("negative").removeClass("positive");
+                }
+                $("span .approved-notice").text(data.ApprovedStatus);
+
+            } else {
+                approveMsg.text(data.Message).addClass("negative").delay(5000).fadeOut();
+            }
+        }
+
+        function OnApproveDenyError(xhr, status, error) {
+            approveMsg.text(error).addClass("negative").delay(5000).fadeOut();
+        }
+
+        /*****************************************************
+        * End Approve/Deny functions
+        *****************************************************/
+
+
+
+
+
+
+        /*****************************************************
+        * Begin Unlock functions
+        *****************************************************/
+
+        var lockMsg = $("#lock-message");
+
+        $("#btn-lock").click(function () {
+            var userName = $("#User_UserName");
+
+            $.ajax({
+                url: '@Url.Action("Unlock", "Membership")',
+                dataType: 'json',
+                type: 'POST',
+                data: { userName: userName.val() },
+                success: OnUnlockSuccess,
+                error: OnUnlockError
+            });
+        });
+
+        function OnUnlockSuccess(data) {
+            if (data.Success) {
+                lockMsg.text(data.Message).addClass("positive").show().delay(3000).fadeOut();
+                if (data.Locked) {
+                    $("#locked-unlocked-div").text(data.LockedStatus).removeClass("positive").addClass("negative");
+                } else {
+                    $("#unlock-span").hide();
+                    $("#locked-unlocked-div").text(data.LockedStatus).removeClass("negative").addClass("positive");
+                }
+            } else {
+                lockMsg.text(data.Message).addClass("negative").delay(5000).fadeOut();
+            }
+        }
+
+        function OnUnlockError(xhr, status, error) {
+            lockMsg.text(error).addClass("negative").delay(5000).fadeOut();
+        }
+
+        /*****************************************************
+        * End Unlock functions
+        *****************************************************/
+
+
+
+
+    });
+</script>

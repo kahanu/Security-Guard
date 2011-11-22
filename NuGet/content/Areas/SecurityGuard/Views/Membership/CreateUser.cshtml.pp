@@ -106,6 +106,10 @@
     $(function () {
 
         var msg = $("#username-message");
+        var btn = $("input[type='submit']");
+
+        $("#UserName").focus();
+
         $("#UserName").blur(function () {
 
             var username = $(this).val();
@@ -128,6 +132,10 @@
         function OnCheckForUniqueUserSuccess(data) {
             if (data.Exists) {
                 msg.text("This username already exists.  Please enter a new one.");
+                btn.attr("disabled", "disabled");
+            } else {
+                msg.text("");
+                btn.removeAttr("disabled");
             }
         }
 

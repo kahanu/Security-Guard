@@ -1,0 +1,301 @@
+@model SecurityGuard.ViewModels.ManageRolesViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/SecurityGuard/Views/Shared/_SecurityGuardLayoutPage.cshtml";
+}
+    <script src="@Url.Content("~/Content/SecurityGuard/scripts/jquery.jqia.selects.js")" type="text/javascript"></script>
+
+<div id="breadcrumb">
+    @Html.ActionLink("Dashboard", "Index", "Dashboard") > Manage Roles
+</div>
+<h2>
+    Manage Roles</h2>
+<script src="/Scripts/jquery.jqia.selects.js" type="text/javascript"></script>
+<ul class="system_messages" style="display: none;">
+</ul>
+<div class="fl w48pc mr20">
+    <fieldset>
+        <p>
+            Role Name<br />
+            @Html.TextBox("RoleName")
+        </p>
+        <p>
+            <button id="add-role">
+                Add</button></p>
+        <hr />
+        <p>
+            Roles<br />
+            @Html.ListBox("Roles", Model.Roles, new { height = "120px", width = "200px" })
+        </p>
+        <p>
+            @Html.CheckBox("throwOnPopulatedRole")&nbsp;Delete role if it has users? <br />(Recommended:
+            un-checked)<br />
+            <button id="delete-roles">
+                Delete</button></p>
+    </fieldset>
+</div>
+<div class="fr w48pc">
+    <fieldset>
+        <p>
+            Get Users In Role<br />
+            @Html.DropDownList("RolesList", Model.Roles, "[Select Role]")
+        </p>
+        <div id="users-in-role-div" style="display: none;">
+            <p>
+                Users In Role
+            </p>
+            <ul>
+            </ul>
+        </div>
+    </fieldset>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+
+        var message = $(".system_messages");
+
+
+        /***********************************************
+        * Begin Add Role Functions
+        ***********************************************/
+        $("#add-role").click(function () {
+            var roleName = $("#RoleName").val();
+
+            if (roleName == "") {
+                ShowMessage("Please enter a role name.");
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("CreateRole", "Role")',
+                dataType: 'json',
+                type: 'POST',
+                data: { roleName: roleName },
+                success: OnCreateRoleSuccess,
+                error: OnCreateRoleError
+            });
+        });
+
+        function OnCreateRoleSuccess(data) {
+            $("li", message).remove();
+            if (data.Success) {
+                $("#RoleName").val("");
+
+                GetAllRoles("Roles");
+                GetAllRoles("RolesList");
+            } else {
+                $("#RoleName").val("");
+            }
+
+            DisplayMessage(data);
+            message.show().delay(5000).fadeOut();
+        }
+
+        function OnCreateRoleError(xhr, status, error) {
+            message.show().delay(5000).fadeOut();    // Show the message
+            $("li", message).addClass("red");      // Apply the Green style
+            $("strong", message).text(error); // Insert the message
+        }
+
+        $("#RoleName").keyup(function () {
+            var text = $(this).val();
+            if (text != "") {
+                $("strong", message).text("");
+            }
+        });
+
+
+        /***********************************************
+        * End Add Role Functions
+        ***********************************************/
+
+
+
+
+        /***********************************************
+        * Begin Delete Role Functions
+        ***********************************************/
+
+        $("#delete-roles").click(function () {
+            var rolesList = $("#Roles");
+
+            if (rolesList.val() == null) {
+                ShowMessage("Please select at least one role to delete.");
+                return;
+            }
+
+            if (!confirm("Are you sure you want to delete these Roles?  This cannot be undone!")) {
+                return;
+            }
+
+            var chkBox = $("#throwOnPopulatedRole");
+            var throwOnPopRole = !chkBox.is(":checked");
+
+            var roles = "";
+
+            $.each(rolesList.val(), function (index, data) {
+                if (data != undefined) {
+                    roles += data + ",";
+                }
+            });
+
+            $.ajax({
+                url: '@Url.Action("DeleteRoles", "Role")',
+                dataType: 'json',
+                type: 'POST',
+                data: { roles: roles, throwOnPopulatedRole: throwOnPopRole },
+                success: OnDeleteRoleSuccess,
+                error: OnDeleteRoleError
+            });
+        });
+
+        function OnDeleteRoleSuccess(data) {
+            if (data.Success) {
+                $("li", message).remove();  // remove all li from the system_messages ul element.
+                $.each(data.Messages, function (index, item) {
+                    if (item.Success) {
+                        // Refresh Roles lists
+                        GetAllRoles("Roles");
+                        GetAllRoles("RolesList");
+                    }
+
+                    // Show the message
+                    DisplayMessage(item);
+                });
+                message.show().delay(5000).fadeOut();
+            }
+        }
+
+        function OnDeleteRoleError(xhr, status, error) {
+            DisplayError(error);
+            message.show().delay(5000).fadeOut();
+        }
+
+        /***********************************************
+        * End Delete Role Functions
+        ***********************************************/
+
+
+
+
+
+
+
+
+        /***********************************************
+        * Begin Get Users In Role Functions
+        ***********************************************/
+
+        //users-in-role-div
+
+        var usersInRoleDiv = $("#users-in-role-div");
+        var ul = $("#users-in-role-div ul");
+
+        $("#RolesList").change(function () {
+            var item = $(this).val();
+
+            if (item != "") {
+                usersInRoleDiv.show();
+
+                $.ajax({
+                    url: '@Url.Action("GetUsersInRole", "Role")',
+                    dataType: 'json',
+                    type: 'GET',
+                    cache: false,
+                    data: { roleName: item },
+                    success: OnGetUsersInRoleSuccess,
+                    error: OnGetUsersInRoleError
+                });
+            } else {
+                $("#users-in-role-div").hide();
+            }
+        });
+
+        function OnGetUsersInRoleSuccess(data) {
+            $("li").remove();
+            if (data == "") {
+                ul.append("<li>No user(s).</li>");
+            } else {
+                $.each(data, function (index, item) {
+                    ul.append("<li><a href=\"/SecurityGuard/Membership/Update/" + item + "\">" + item + "</a></li>");
+                });
+            }
+        }
+
+        function OnGetUsersInRoleError(xhr, status, error) {
+            message.show().delay(5000).fadeOut();    // Show the message
+            $("li", message).addClass("red");      // Apply the Green style
+            $("strong", message).text(error); // Insert the message
+        }
+
+        /***********************************************
+        * End Get Users In Role Functions
+        ***********************************************/
+
+
+
+
+
+
+
+
+
+
+        /***********************************************
+        * Begin Common Role Functions
+        ***********************************************/
+
+        function GetAllRoles(selectObject) {
+            $.ajax({
+                url: '@Url.Action("GetAllRoles", "Role")',
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    var rolesList = $("#" + selectObject);
+                    rolesList.loadSelect(data);
+                }
+            });
+        }
+
+
+        //<ul class="system_messages" style="display: none;">
+        //    <li><span class="ico"></span><strong class="system_title"></strong></li>
+        //</ul>
+
+        function DisplayError(error) {
+            var li = $("<li></li>").addClass("red");
+            var span = $("<span></span>").addClass("ico").appendTo(li);
+            var strong = $("<strong></strong>").addClass("system_title").html(error).appendTo(li);
+
+            li.appendTo(message);
+        }
+
+        function DisplayMessage(data) {
+            var li = $("<li></li>").addClass(data.CssClass);
+            var span = $("<span></span>").addClass("ico").appendTo(li);
+            var strong = $("<strong></strong>").addClass("system_title").html(data.Message).appendTo(li);
+
+            li.appendTo(message);
+        }
+
+        function ShowMessage(msg) {
+            $("li", message).remove();
+            var li = $("<li></li>").addClass("yellow");
+            var span = $("<span></span>").addClass("ico").appendTo(li);
+            var strong = $("<strong></strong>").addClass("system_title").html(msg).appendTo(li);
+
+            li.appendTo(message);
+            message.show().delay(5000).fadeOut();
+        }
+
+        /***********************************************
+        * End Common Role Functions
+        ***********************************************/
+
+
+    });
+
+
+
+</script>

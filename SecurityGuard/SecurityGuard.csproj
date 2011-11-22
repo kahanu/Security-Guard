@@ -55,7 +55,11 @@
   <ItemGroup>
     <Compile Include="Core\Attributes\MultiButtonFormSubmitAttribute.cs" />
     <Compile Include="Core\ConfigSettings.cs" />
+    <Compile Include="Core\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Core\HtmlHelpers\UIHelpers.cs" />
+    <Compile Include="Core\Pagination\IPaginatedList.cs" />
+    <Compile Include="Core\Pagination\PaginationHelpers.cs" />
+    <Compile Include="Core\Pagination\PaginatedList.cs" />
     <Compile Include="Core\RouteHelpers\Actions.cs" />
     <Compile Include="Core\RouteHelpers\Area.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />

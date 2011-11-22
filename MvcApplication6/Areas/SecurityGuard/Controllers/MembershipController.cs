@@ -1,6 +1,7 @@
 using System;
 using System.Web.Mvc;
 using System.Web.Security;
+using SecurityGuard.Core.Extensions;
 using SecurityGuard.Services;
 using SecurityGuard.Core.Attributes;
 using routeHelpers = SecurityGuard.Core.RouteHelpers;
@@ -28,21 +29,38 @@ namespace MvcApplication6.Areas.SecurityGuard.Controllers
         #endregion
 
         #region Index Method
-        public virtual ActionResult Index(string searchterm, string filterby)
+        public virtual ActionResult Index(string filterby, string searchterm)
         {
             ManageUsersViewModel viewModel = new ManageUsersViewModel();
             viewModel.Users = null;
+            viewModel.FilterBy = filterby;
+            viewModel.SearchTerm = searchterm;
 
-            if (!string.IsNullOrEmpty(searchterm))
+            int totalRecords;
+            int page = Convert.ToInt32(Request["page"]);
+            int pageSize = Convert.ToInt32(Request["pagesize"]);
+            if (pageSize == 0)
+                pageSize = 25;
+
+            viewModel.PageSize = pageSize;
+
+            if (!string.IsNullOrEmpty(filterby))
             {
-                string query = searchterm + "%";
-                if (filterby == "email")
+                if (filterby == "all")
                 {
-                    viewModel.Users = membershipService.FindUsersByEmail(query);
+                    viewModel.PaginatedUserList = membershipService.GetAllUsers(page, pageSize, out totalRecords).ToPaginatedList(page, pageSize, totalRecords, searchterm, filterby);
                 }
-                else if (filterby == "username")
+                else if (!string.IsNullOrEmpty(searchterm))
                 {
-                    viewModel.Users = membershipService.FindUsersByName(query);
+                    string query = searchterm + "%";
+                    if (filterby == "email")
+                    {
+                        viewModel.PaginatedUserList = membershipService.FindUsersByEmail(query, page, pageSize, out totalRecords).ToPaginatedList(page, pageSize, totalRecords, searchterm, filterby);
+                    }
+                    else if (filterby == "username")
+                    {
+                        viewModel.PaginatedUserList = membershipService.FindUsersByName(query, page, pageSize, out totalRecords).ToPaginatedList(page, pageSize, totalRecords, searchterm, filterby);
+                    }
                 }
             }
 

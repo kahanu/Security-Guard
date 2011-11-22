@@ -15,8 +15,8 @@ namespace MvcApplication6.Areas.SecurityGuard
         public override void RegisterArea(AreaRegistrationContext context)
         {
 
-            context.MapRoute("SearchMembership", "SecurityGuard/Membership/index/{searchterm}/{filterby}",
-                new { controller = "Membership", action = "Index", searchterm = UrlParameter.Optional, filterby = UrlParameter.Optional }
+            context.MapRoute("SearchMembership", "SecurityGuard/Membership/index/{filterby}/{searchterm}",
+                new { controller = "Membership", action = "Index", searchterm = UrlParameter.Optional, filterby = "all" }
                 );
 
             context.MapRoute("Membership", "SecurityGuard/Membership/{action}/{userName}",
