@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web.Security;
 using SecurityGuard.Interfaces;
 
 namespace SecurityGuard.Services

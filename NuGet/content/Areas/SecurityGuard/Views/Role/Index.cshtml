@@ -71,6 +71,7 @@
                 url: '@Url.Action("CreateRole", "Role")',
                 dataType: 'json',
                 type: 'POST',
+                cache: false,
                 data: { roleName: roleName },
                 success: OnCreateRoleSuccess,
                 error: OnCreateRoleError
@@ -144,6 +145,7 @@
                 url: '@Url.Action("DeleteRoles", "Role")',
                 dataType: 'json',
                 type: 'POST',
+                cache: false,
                 data: { roles: roles, throwOnPopulatedRole: throwOnPopRole },
                 success: OnDeleteRoleSuccess,
                 error: OnDeleteRoleError
@@ -251,6 +253,7 @@
                 url: '@Url.Action("GetAllRoles", "Role")',
                 dataType: 'json',
                 type: 'GET',
+                cache: false,
                 success: function (data) {
                     var rolesList = $("#" + selectObject);
                     rolesList.loadSelect(data);
