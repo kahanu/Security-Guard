@@ -2,13 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>SecurityGuard.MVC4</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <authors>Gizmo Beach</authors>
     <owners>Gizmo Beach</owners>
     <licenseUrl>http://www.opensource.org/licenses/ms-pl</licenseUrl>
     <projectUrl>https://github.com/kahanu/Security-Guard</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>An easy-to-use management system for the ASP.NET Membership system built for ASP.NET MVC 4 applications.  This application comes complete with an Area, Controllers, Views and everything you need to start managing your ASP.NET MVC 4 application immediately.</description>
-    <tags>mvc asp.net membership security guard</tags>
+    <tags>mvc asp.net membership security guard mvc4</tags>
   </metadata>
 </package>

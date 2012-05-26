@@ -25,7 +25,7 @@
 <script src="<%: Url.Content("~/Scripts/jquery.validate.min.js") %>" type="text/javascript"></script>
 <script src="<%: Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js") %>" type="text/javascript"></script>
 
-<% using (Html.BeginForm()) { %>
+<% using (Html.BeginForm((string)ViewBag.FormAction, "SGAccount")) { %>
     <%: Html.ValidationSummary(true) %>
     <fieldset>
         <legend>Account Information</legend>

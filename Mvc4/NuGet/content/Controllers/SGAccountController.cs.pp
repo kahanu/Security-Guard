@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using MVCCentral.Framework;
@@ -23,11 +25,13 @@ namespace $rootnamespace$.Controllers
 
         private IMembershipService membershipService;
         private IAuthenticationService authenticationService;
+        private IFormsAuthenticationService formsAuthenticationService;
 
         public SGAccountController()
         {
             this.membershipService = new MembershipService(Membership.Provider);
             this.authenticationService = new AuthenticationService(membershipService, new FormsAuthenticationService());
+            this.formsAuthenticationService = new FormsAuthenticationService();
         }
 
         #endregion
@@ -46,7 +50,7 @@ namespace $rootnamespace$.Controllers
             {
                 EnablePasswordReset = membershipService.EnablePasswordReset
             };
-            return View(viewModel);
+            return ContextDependentView(viewModel);
         }
 
         [HttpPost]
@@ -112,7 +116,7 @@ namespace $rootnamespace$.Controllers
             {
                 RequireSecretQuestionAndAnswer = membershipService.RequiresQuestionAndAnswer
             };
-            return View(model);
+            return ContextDependentView(model);
         }
 
         [HttpPost]
@@ -122,11 +126,11 @@ namespace $rootnamespace$.Controllers
             {
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, model.SecretQuestion, model.SecretAnswer, true, out createStatus);
+                membershipService.CreateUser(model.UserName, model.Password, model.Email, model.SecretQuestion, model.SecretAnswer, true, out createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
+                    formsAuthenticationService.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -355,5 +359,102 @@ namespace $rootnamespace$.Controllers
         }
 
         #endregion
+        
+        #region Json Methods
+
+        [HttpPost]
+        public JsonResult JsonLogOn(LogOnViewModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                if (authenticationService.LogOn(model.UserName, model.Password, model.RememberMe))
+                {
+                    return Json(new { success = true, redirect = returnUrl });
+                }
+                else
+                {
+                    MembershipUser user = membershipService.GetUser(model.UserName);
+                    if (user == null)
+                    {
+                        ModelState.AddModelError("", "This account does not exist. Please try again.");
+                    }
+                    else
+                    {
+                        if (!user.IsApproved)
+                        {
+                            ModelState.AddModelError("", "Your account has not been approved yet.");
+                        }
+                        else if (user.IsLockedOut)
+                        {
+                            ModelState.AddModelError("", "Your account is currently locked.");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                        }
+                    }
+                }
+            }
+
+            // If we got this far, something failed
+            return Json(new { errors = GetErrorsFromModelState() });
+        }
+
+        [HttpPost]
+        public JsonResult JsonRegister(viewModels.RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Attempt to register the user
+                MembershipCreateStatus createStatus;
+                membershipService.CreateUser(model.UserName, model.Password, model.Email, model.SecretQuestion, model.SecretAnswer, true, out createStatus);
+
+                if (createStatus == MembershipCreateStatus.Success)
+                {
+                    formsAuthenticationService.SetAuthCookie(model.UserName, false);
+
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(createStatus));
+                }
+            }
+
+            return Json(new { errors = GetErrorsFromModelState() });
+        }
+
+        #endregion
+
+        #region Private Helpers
+
+        private ActionResult ContextDependentView(object model)
+        {
+            string actionName = ControllerContext.RouteData.GetRequiredString("action");
+
+            if (actionName.ToLower().Contains("logon"))
+                model = (LogOnViewModel)model;
+            else
+                model = (viewModels.RegisterViewModel)model;
+
+            if (Request.QueryString["content"] != null)
+            {
+                ViewBag.FormAction = "Json" + actionName;
+                return PartialView(model);
+            }
+            else
+            {
+                ViewBag.FormAction = actionName;
+                return View(model);
+            }
+        }
+
+        private IEnumerable<string> GetErrorsFromModelState()
+        {
+            return ModelState.SelectMany(x => x.Value.Errors.Select(error => error.ErrorMessage));
+        }
+
+        #endregion
+        
     }
 }
