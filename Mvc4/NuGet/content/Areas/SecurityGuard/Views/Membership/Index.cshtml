@@ -172,7 +172,8 @@
             var userName = $(this).val();
 
             // Get a reference to the "href" of the link.
-            var href = anchor.attr("href");
+            //var href = anchor.attr("href");
+            var href = '@Url.Action("GrantRolesToUser", "Membership")';
 
             // Concatenate the existing href value with the username
             var newHref = href + "/" + userName;
