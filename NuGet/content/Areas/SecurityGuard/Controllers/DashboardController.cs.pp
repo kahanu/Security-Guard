@@ -28,7 +28,10 @@ namespace $rootnamespace$.Areas.SecurityGuard.Controllers
         public virtual ActionResult Index()
         {
             DashboardViewModel viewModel = new DashboardViewModel();
-            viewModel.TotalUserCount = membershipService.GetAllUsers().Count.ToString();
+            int totalRecords;
+
+            membershipService.GetAllUsers(0, 20, out totalRecords);
+            viewModel.TotalUserCount = totalRecords.ToString();
             viewModel.TotalUsersOnlineCount = membershipService.GetNumberOfUsersOnline().ToString();
             viewModel.TotalRolesCount = roleService.GetAllRoles().Length.ToString();
 
