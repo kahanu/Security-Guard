@@ -231,6 +231,13 @@ namespace $rootnamespace$.Controllers
             // Get the userName by the email address
             string userName = membershipService.GetUserNameByEmail(model.Email);
 
+
+            if (string.IsNullOrEmpty(userName))
+            {
+                ModelState.AddModelError("Email", "The email address does not exist.  Please enter a valid email address.");
+                return RedirectToAction("ForgotPassword");
+            }
+
             // Get the user by the userName
             MembershipUser user = membershipService.GetUser(userName);
 
