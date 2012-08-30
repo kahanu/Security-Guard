@@ -1,0 +1,36 @@
+﻿@model MvcApplication9.Models.RegisterExternalLoginModel
+@{
+    ViewBag.Title = "Registrarse";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Asociar su cuenta de @ViewBag.ProviderDisplayName.</h2>
+</hgroup>
+
+@using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Formulario de asociación</legend>
+        <p>
+            Se ha autenticado correctamente con <strong>@ViewBag.ProviderDisplayName</strong>.
+            Escriba un nombre de usuario para este sitio y haga clic en el botón Confirmar para finalizar
+            el inicio de sesión.
+        </p>
+        <ol>
+            <li class="name">
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+            </li>
+        </ol>
+        @Html.HiddenFor(m => m.ExternalLoginData)
+        <input type="submit" value="Registrarse" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
