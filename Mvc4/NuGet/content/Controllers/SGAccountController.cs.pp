@@ -124,6 +124,10 @@ namespace $rootnamespace$.Controllers
         {
             if (ModelState.IsValid)
             {
+                //validate that the password are the same.
+                if(model.Password != model.ConfirmPassword)
+                    return View(model);
+
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
                 membershipService.CreateUser(model.UserName, model.Password, model.Email, model.SecretQuestion, model.SecretAnswer, true, out createStatus);
