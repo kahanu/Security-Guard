@@ -4,7 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
-using MVCCentral.Framework;
+using $rootnamespace$.Mailers;
+using $rootnamespace$.Mailers.Models;
 using SecurityGuard.Core;
 using SecurityGuard.Interfaces;
 using SecurityGuard.Services;
@@ -26,12 +27,23 @@ namespace $rootnamespace$.Controllers
         private IMembershipService membershipService;
         private IAuthenticationService authenticationService;
         private IFormsAuthenticationService formsAuthenticationService;
+        private IPasswordResetMailer _mailer = new PasswordResetMailer();
 
         public SGAccountController()
         {
             this.membershipService = new MembershipService(Membership.Provider);
             this.authenticationService = new AuthenticationService(membershipService, new FormsAuthenticationService());
             this.formsAuthenticationService = new FormsAuthenticationService();
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public IPasswordResetMailer Mailer
+        {
+            get { return _mailer; }
+            set { _mailer = value; }
         }
 
         #endregion
@@ -261,8 +273,19 @@ namespace $rootnamespace$.Controllers
             // Email the new pasword to the user
             try
             {
-                string body = BuildMessageBody(user.UserName, newPassword, ConfigSettings.SecurityGuardEmailTemplatePath);
-                Mail(model.Email, ConfigSettings.SecurityGuardEmailFrom, ConfigSettings.SecurityGuardEmailSubject, body, true);
+                //string body = BuildMessageBody(user.UserName, newPassword, ConfigSettings.SecurityGuardEmailTemplatePath);
+                //Mail(model.Email, ConfigSettings.SecurityGuardEmailFrom, ConfigSettings.SecurityGuardEmailSubject, body, true);
+
+                // Set the MailerModel properties that will be passed to the MvcMailer object.
+                // Feel free to modify the properties as you need.
+                MailerModel m = new MailerModel();
+                m.UserName = user.UserName;
+                m.Password = newPassword;
+                m.FromEmail = ConfigSettings.SecurityGuardEmailFrom;
+                m.Subject = ConfigSettings.SecurityGuardEmailSubject;
+                m.ToEmail = model.Email;
+
+                Mailer.PasswordReset(m).Send();                
             }
             catch (Exception)
             {
@@ -322,25 +345,27 @@ namespace $rootnamespace$.Controllers
         #region Mailer Helpers
 
         /// <summary>
-        /// This method encapsulates the email function.
+        /// **** OBSOLETE ***
+        /// This method encapsulates the email function. 
+        /// Now using MvcMailer instead.
         /// </summary>
         /// <param name="emailTo"></param>
         /// <param name="emailFrom"></param>
         /// <param name="subject"></param>
         /// <param name="body"></param>
         /// <param name="isHtml"></param>
-        private void Mail(string emailTo, string emailFrom, string subject, string body, bool isHtml)
-        {
-            Email email = new Email();
-            email.ToList = emailTo;
-            email.FromEmail = emailFrom;
-            email.Subject = subject;
-            email.MessageBody = body;
-            email.isHTML = isHtml;
+        //private void Mail(string emailTo, string emailFrom, string subject, string body, bool isHtml)
+        //{
+        //    Email email = new Email();
+        //    email.ToList = emailTo;
+        //    email.FromEmail = emailFrom;
+        //    email.Subject = subject;
+        //    email.MessageBody = body;
+        //    email.isHTML = isHtml;
             
-            email.SendEmail(email);
+        //    email.SendEmail(email);
 
-        }
+        //}
 
         /// <summary>
         /// This function builds the email message body from the ResetPassword.html file.

@@ -621,3 +621,7 @@ div.editor-field, div.display-field
 /*************************************************************
 * End Common Table Styles
 *************************************************************/
+
+#logoutForm {
+    display: inline;
+}

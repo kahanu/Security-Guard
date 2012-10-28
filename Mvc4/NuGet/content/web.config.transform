@@ -10,11 +10,4 @@
       <forms loginUrl="~/SGAccount/LogOn" timeout="2880" />
     </authentication>
   </system.web>
-  <system.net>
-    <mailSettings>
-      <smtp deliveryMethod="Network">
-        <network host="[your SMTP mail server]" userName="[your email address]" password="[your email password]" port="25"/>
-      </smtp>
-    </mailSettings>
-  </system.net>  
 </configuration>

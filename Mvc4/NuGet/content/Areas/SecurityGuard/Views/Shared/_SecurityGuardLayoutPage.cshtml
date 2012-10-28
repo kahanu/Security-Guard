@@ -14,7 +14,11 @@
                 <div class="title">
                     Security Guard Dashboard <span>powered by <a href="http://www.gizmobeach.com" target="_blank">Gizmo Beach</a></span></div>
                 <div id="menu">
-                    Welcome <strong>@User.Identity.Name</strong>! [ @Html.ActionLink("Log Off", "LogOff", "SGAccount", new { area = "" }, null) ] | 
+                    Welcome <strong>@User.Identity.Name</strong>! [ @using (Html.BeginForm("LogOff", "SGAccount", new { area = "" }, FormMethod.Post, new { id = "logoutForm" }))
+                                                                    {
+                        @Html.AntiForgeryToken()
+                        <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                                                                    } ] | 
                     <a href="https://github.com/kahanu/Security-Guard" target="_blank">Help</a>
                 </div>
             </div>
