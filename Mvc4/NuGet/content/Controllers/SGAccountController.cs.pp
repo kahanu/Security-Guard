@@ -44,7 +44,7 @@ namespace $rootnamespace$.Controllers
         #region LogOn Methods
 
         [HttpGet]
-        public virtual ActionResult LogOn()
+        public virtual ActionResult Login()
         {
             var viewModel = new LogOnViewModel()
             {
@@ -54,7 +54,8 @@ namespace $rootnamespace$.Controllers
         }
 
         [HttpPost]
-        public virtual ActionResult LogOn(LogOnViewModel model, string returnUrl)
+        [ValidateAntiForgeryToken]
+        public virtual ActionResult Login(LogOnViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -96,10 +97,11 @@ namespace $rootnamespace$.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return RedirectToAction("LogOn");
+            return RedirectToAction("Login");
         }
 
-        [HttpGet]
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        [ValidateAntiForgeryToken()]
         public virtual ActionResult LogOff()
         {
             authenticationService.LogOff();
@@ -120,6 +122,7 @@ namespace $rootnamespace$.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken()]
         public virtual ActionResult Register(viewModels.RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -161,6 +164,7 @@ namespace $rootnamespace$.Controllers
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken()]
         public virtual ActionResult ChangePassword(ChangePasswordViewModel model)
         {
             if (ModelState.IsValid)
@@ -226,6 +230,7 @@ namespace $rootnamespace$.Controllers
         /// <param name="email"></param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateAntiForgeryToken()]
         public ActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
             // Get the userName by the email address
@@ -439,7 +444,7 @@ namespace $rootnamespace$.Controllers
         {
             string actionName = ControllerContext.RouteData.GetRequiredString("action");
 
-            if (actionName.ToLower().Contains("logon"))
+            if (actionName.ToLower().Contains("login"))
                 model = (LogOnViewModel)model;
             else
                 model = (viewModels.RegisterViewModel)model;

@@ -21,6 +21,7 @@
 <script src="@Url.Content("~/Content/SecurityGuard/scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 @using (Html.BeginForm((string)ViewBag.FormAction, "SGAccount"))
 {
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <div>
         <fieldset>
