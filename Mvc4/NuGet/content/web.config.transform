@@ -7,7 +7,7 @@
   </appSettings>
   <system.web>
     <authentication mode="Forms">
-      <forms loginUrl="~/SGAccount/LogOn" timeout="2880" />
+      <forms loginUrl="~/SGAccount/Login" timeout="2880" />
     </authentication>
   </system.web>
 </configuration>
