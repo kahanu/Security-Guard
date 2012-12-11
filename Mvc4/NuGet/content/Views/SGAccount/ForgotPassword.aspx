@@ -15,9 +15,9 @@
 
 <% using (Html.BeginForm()) { %>
     <%: Html.AntiForgeryToken() %>
-    <%: Html.ValidationSummary(true) %>
+    <%: Html.ValidationSummary() %>
     <fieldset>
-        <legend>ForgotPasswordViewModel</legend>
+        <legend>Reset your password</legend>
 
         <div class="editor-label">
             <%: Html.LabelFor(model => model.Email) %>
@@ -28,9 +28,14 @@
         </div>
 
         <p>
-            <input type="submit" value="Reset Password" />
+            <%: Html.HiddenFor(model => model.RequireSecretQuestionAndAnswer) %>
+            <input type="submit" value="Submit" />
         </p>
     </fieldset>
 <% } %>
 
 </asp:Content>
+
+<script type="text/javascript">
+    $("#Email").focus();
+</script>

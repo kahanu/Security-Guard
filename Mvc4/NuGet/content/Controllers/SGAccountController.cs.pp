@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net.Configuration;
 using System.Web.Mvc;
 using System.Web.Security;
 using $rootnamespace$.Mailers;
@@ -231,9 +233,21 @@ namespace $rootnamespace$.Controllers
         {
             var viewModel = new ForgotPasswordViewModel()
             {
-                RequiresQuestionAndAnswer = membershipService.RequiresQuestionAndAnswer
+                RequireSecretQuestionAndAnswer = membershipService.RequiresQuestionAndAnswer
             };
             return View(viewModel);
+        }
+
+        /// <summary>
+        /// This is the GET action to collect the answer and then continue.
+        /// This is only hit if the web.config/system.web/membership provider is
+        /// set with the attribute requiresQuestionAndAnswer="true".
+        /// </summary>
+        /// <param name="model">ForgotPasswordViewModel</param>
+        /// <returns></returns>
+        public virtual ActionResult EnterSecretAnswer(ForgotPasswordViewModel model)
+        {
+            return View(model);
         }
 
         /// <summary>
@@ -243,27 +257,62 @@ namespace $rootnamespace$.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken()]
-        public ActionResult ForgotPassword(ForgotPasswordViewModel model)
+        public virtual ActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
-            // Get the userName by the email address
             string userName = membershipService.GetUserNameByEmail(model.Email);
-
-
+            // Get the userName by the email address
             if (string.IsNullOrEmpty(userName))
             {
-                ModelState.AddModelError("Email", "The email address does not exist.  Please enter a valid email address.");
+                ModelState.AddModelError("Email", "Email address does not exist. Please check your spelling and try again.");
                 return RedirectToAction("ForgotPassword");
             }
 
-            // Get the user by the userName
             MembershipUser user = membershipService.GetUser(userName);
+            if (user == null)
+            {
+                ModelState.AddModelError("", "The user does not exist.  Please check your entry and try again.");
+                return RedirectToAction("ForgotPassword");
+            }
+
+            if (model.RequireSecretQuestionAndAnswer && model.Checked == false)
+            {
+                // Get the SecretQuestion
+                model.SecretQuestion = user.PasswordQuestion;
+                model.Checked = true;
+
+                return RedirectToAction("EnterSecretAnswer", model);
+            }            
+            
+            if (model.RequireSecretQuestionAndAnswer && model.Checked == true)
+            {
+                if (string.IsNullOrEmpty(model.SecretAnswer))
+                {
+                    ModelState.AddModelError("SecretAnswer", "The Secret Answer is required.");
+                    return RedirectToAction("EnterSecretAnswer", model);
+                }
+            }
+
+
 
             // Now reset the password
             string newPassword = string.Empty;
 
             if (membershipService.RequiresQuestionAndAnswer)
             {
-                newPassword = user.ResetPassword(model.PasswordAnswer);
+                try
+                {
+                    newPassword = user.ResetPassword(model.SecretAnswer);
+                }
+                catch (NullReferenceException)
+                {
+                    ModelState.AddModelError("PasswordAnswer", "The Secret Password is required.");
+                    return RedirectToAction("EnterSecretAnswer", model);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("PasswordAnswer", ex.Message);
+                    return RedirectToAction("EnterSecretAnswer", model);
+                }
             }
             else
             {
@@ -273,15 +322,14 @@ namespace $rootnamespace$.Controllers
             // Email the new pasword to the user
             try
             {
-                //string body = BuildMessageBody(user.UserName, newPassword, ConfigSettings.SecurityGuardEmailTemplatePath);
-                //Mail(model.Email, ConfigSettings.SecurityGuardEmailFrom, ConfigSettings.SecurityGuardEmailSubject, body, true);
+                SmtpSection smtp = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
 
                 // Set the MailerModel properties that will be passed to the MvcMailer object.
                 // Feel free to modify the properties as you need.
                 MailerModel m = new MailerModel();
                 m.UserName = user.UserName;
                 m.Password = newPassword;
-                m.FromEmail = ConfigSettings.SecurityGuardEmailFrom;
+                m.FromEmail = smtp.From;
                 m.Subject = ConfigSettings.SecurityGuardEmailSubject;
                 m.ToEmail = model.Email;
 
@@ -293,6 +341,7 @@ namespace $rootnamespace$.Controllers
 
             return RedirectToAction("ForgotPasswordSuccess");
         }
+
 
         public ActionResult ForgotPasswordSuccess()
         {
