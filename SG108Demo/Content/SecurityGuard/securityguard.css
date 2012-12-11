@@ -1,0 +1,627 @@
+html, body {
+	height: auto;
+}
+
+body
+{
+    font-size: .85em;
+    font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+    margin: 0;
+    padding: 0;
+    color: #696969;
+}
+
+#wrapper
+{
+    min-width: 1000px;
+    min-height: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#header
+{
+    margin: 0 auto;
+}
+
+h1
+{
+    float: left;
+    width: auto;
+}
+
+.title
+{
+    float: left;
+    width: auto;
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.title span
+{
+    font-size: .4em;
+    font-weight:normal;
+}
+
+.inner 
+{
+    width: 960px;
+    margin: 0 auto;
+}
+
+#menu
+{
+    float: right;
+    width: auto;
+    margin-top: 20px;
+}
+
+#content
+{
+    clear: both;
+}
+
+.fl
+{
+    float: left;
+}
+
+.fr
+{
+    float: right;
+}
+
+.w40pc
+{
+    width: 40%;
+}
+
+.w48pc
+{
+    width: 48%;
+}
+
+.w50pc
+{
+    width: 50%;
+}
+
+.mr20
+{
+    margin-right: 20px;
+}
+
+
+
+
+
+/*************************************
+* Begin Dashboard Styles
+*************************************/
+
+
+
+/*************************************
+* End Dashboard Styles
+*************************************/
+
+
+
+
+
+
+
+
+/*************************************
+* Begin Membership Styles
+*************************************/
+
+#available-roles, #granted-roles, #grant-controls
+{
+    float: left;
+    width: auto;
+    height: 100%;
+}
+
+#available-roles h3, #granted-roles h3
+{
+    margin: 0;
+}
+
+#available-roles select, #granted-roles select
+{
+    min-width: 150px;
+    width: auto;
+    height: 280px;
+    margin-bottom: 1.4em;
+}
+
+#grant-controls
+{
+    margin: 75px 10px 0 10px;
+}
+
+#grant-controls button
+{
+    width: 110px;
+}
+
+#username-to-grant-roles
+{
+    border: 1px solid #FFCC66;
+    padding: 3px;
+    background-color: #FFFF99;
+    font-weight: bold;
+    font-size: medium;
+}
+
+.approved
+{
+    float: left;
+    width: 16px;
+    background-image:url(images/positive.gif);
+    background-repeat: no-repeat;
+    padding-right: 10px;
+}
+
+.notapproved
+{
+    float: left;
+    width: 16px;
+    background-image:url(images/negative.gif);
+    background-repeat: no-repeat;
+    padding-right: 10px;
+}
+
+/*************************************
+* End Membership Styles
+*************************************/
+
+
+
+
+
+
+
+
+/*************************************
+* Begin Roles Styles
+*************************************/
+
+#role-column-left, #role-column-right
+{
+    float: left;
+    width: 45%;
+    margin-right: 20px;
+}
+
+/*
+#users-in-role-div ul
+{
+    list-style-type: none;
+}
+*/
+/*************************************
+* End Roles Styles
+*************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*************************************
+* Begin Common Styles
+*************************************/
+
+
+div.row
+{
+    width: 100%;
+    overflow: hidden;
+    padding: 0 0 11px 0;
+}
+div.row label
+{
+    display: block;
+    float: left;
+    width: 160px;
+    font-weight: bold;
+}
+div.row div.inputs
+{
+    /*width: 520px;*/
+    width: 790px;
+}
+div.row div.inputs .input_wrapper
+{
+    float: left;
+    width: 300px;
+    margin: 0 8px 0 0;
+    padding: 2px 4px;
+    /*border: 1px solid #cecece;*/
+}
+div.row div.inputs .input_wrapper input.text
+{
+    /*border: 0;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    width: 100%;
+    display: block;*/
+}
+div.row div.inputs .textarea_wrapper
+{
+    width: 508px;
+    height: 120px;
+    margin: 0 !important;
+}
+
+
+div.row div.inputs .textarea_wrapper textarea
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: transparent;
+    margin: 0;
+    padding: 2px;
+    /*border: 0;*/
+    font-size: 13px;
+    font-family: 'Trebuchet Ms';
+}
+
+
+.system
+{
+    display: block;
+    float: left;
+    padding: 0 0 0 19px;
+    white-space: nowrap;
+    font-weight: bold;
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+.positive
+{
+    color: #82a800;
+    background-image: url(images/positive.gif);
+}
+
+.negative
+{
+    color: #b86464;
+    background-image: url(images/negative.gif);
+}
+
+.system_messages
+{
+    margin: 0;
+    padding: 15px 0 0;
+}
+
+.system_messages li
+{
+    list-style: none;
+    margin: 0 0 7px;
+    padding: 6px 0 6px 38px;
+    font-size: 11px;
+    position: relative;
+    top: 0;
+    left: 0;
+    min-height: 1px;
+    list-style-position: outside;
+}
+
+.white
+{
+    background: #fefefe url(images/white_message.gif) repeat-x;
+    border: 1px solid #dbdbdb;
+}
+
+.system_title
+{
+    font-size: 11px;
+}
+
+.ico
+{
+    display: block;
+    width: 23px;
+    height: 23px;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    position: absolute;
+    left: 4px;
+    top: 1px;
+}
+
+.white .system_title
+{
+    color: #4f4f4f;
+}
+
+.white .ico
+{
+    background-image: url(images/white_ico.png);
+}
+
+.red
+{
+    background: #e2c5c5 url(images/red_message.gif) repeat-x;
+    border: 1px solid #cf9e9e;
+}
+
+.red .system_title
+{
+    color: #ae2727;
+}
+
+.red .ico
+{
+    background-image: url(images/red_ico.png);
+}
+
+
+
+.blue
+{
+    background: #c4dde3 url(images/blue_message.gif) repeat-x;
+    border: 1px solid #9cc6d0;
+}
+
+.blue .system_title
+{
+    color: #0f4b74;
+}
+
+.blue .ico
+{
+    background-image: url(images/blue_ico.png);
+}
+
+.green
+{
+    background: #c7e5c2 url(images/green_message.gif) repeat-x;
+    border: 1px solid #a2d399;
+}
+
+.green .system_title
+{
+    color: #386d19;
+}
+
+.green .ico
+{
+    background-image: url(images/green_ico.png);
+}
+
+
+.yellow
+{
+    background: #eae1b1 url(images/yellow_message.gif) repeat-x;
+    border: 1px solid #e0d182;
+}
+
+.yellow .system_title
+{
+    color: #675918;
+}
+
+.yellow .ico
+{
+    background-image: url(images/yellow_ico.png);
+}
+
+/*************************************
+* End Common Styles
+*************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* FORM LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset
+{
+    border: 1px solid #ddd;
+    /*padding: 0 1.4em 1.4em 1.4em;*/
+    padding: 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend
+{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea
+{
+    min-height: 75px;
+    /*min-height: 323px;*/
+}
+
+input[type="text"], input[type="password"]
+{
+    border: 1px solid #ccc;
+    padding: 2px;
+    font-size: 1.2em;
+    color: #444;
+    width: 300px;
+}
+
+select
+{
+    border: 1px solid #ccc;
+    padding: 2px;
+    font-size: 1.2em;
+    color: #444;
+}
+
+input[type="submit"]
+{
+    font-size: 1.2em;
+    padding: 5px;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+/* Styles for editor and display helpers
+----------------------------------------------------------*/
+.display-label, .editor-label
+{
+    margin: 1em 0 0 0;
+}
+
+.display-field, .editor-field
+{
+    margin: 0.5em 0 0 0;
+}
+
+.text-box
+{
+    width: 30em;
+}
+
+.text-box.multi-line
+{
+    height: 6.5em;
+}
+
+.tri-state
+{
+    width: 6em;
+}
+
+
+div.editor-label, div.display-label
+{
+    float: left;
+    width: 150px;
+}
+
+div.editor-field, div.display-field
+{
+    /*clear: left;*/
+    margin-bottom: 5px;
+}
+
+
+
+
+/*************************************************************
+* Begin Common Table Styles
+*************************************************************/
+
+.table_wrapper {
+	width: 100%;
+	margin: 0 auto;
+	font-size: 14px;
+	
+}
+
+.table_wrapper_inner {
+	border: solid #dbdbdb;
+	border-width:  0 0 0 1px;
+}
+
+.table_wrapper td, .table_wrapper th {
+	border: solid #dbdbdb;
+	border-width: 1px 1px 1px 0;
+}
+
+.table_wrapper th {
+	font-weight: bold;
+	font-size: 13px;
+}
+
+.table_wrapper th 
+{
+    border-width: 2px 1px 0 0;
+}
+
+.table_wrapper td , .table_wrapper th {
+	text-align: left;
+	padding: 0 12px;
+	line-height: 26px;
+	font-size: 16px;
+}
+
+.table_wrapper th {
+	background: #fff;
+}
+
+.table_wrapper td {
+	background: #fefefe url(images/td_bg1.gif) repeat-x;
+}
+
+.table_wrapper tr.second td {
+	background: #f2f2f2 url(images/td_bg2.gif) repeat-x;
+}
+
+/*************************************************************
+* End Common Table Styles
+*************************************************************/
+
+#logoutForm {
+    display: inline;
+}

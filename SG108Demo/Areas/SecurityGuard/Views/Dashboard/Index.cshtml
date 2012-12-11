@@ -1,0 +1,54 @@
+@model SecurityGuard.ViewModels.DashboardViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/SecurityGuard/Views/Shared/_SecurityGuardLayoutPage.cshtml";
+}
+<h2>
+    Manage Users and Roles</h2>
+<p>
+    An easy-to-use management system for Membership Users and Roles based on the ASP.NET
+    Membership system.</p>
+<div class="fl w48pc mr20">
+    <fieldset>
+        <legend>Manage Users</legend>
+        <p>@Html.ActionLink("Manage Users", "Index", "Membership", new { area = "SecurityGuard" }, null)
+            | @Html.ActionLink("Create User", "CreateUser", "Membership", new { area = "SecurityGuard" }, null)</p>
+        <table>
+            <tr>
+                <td>
+                    Total Users:
+                </td>
+                <td>@Model.TotalUserCount
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Users Online:
+                </td>
+                <td>@Model.TotalUsersOnlineCount
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+<div class="fr w48pc">
+    <fieldset>
+        <legend>Manage Roles</legend>
+        <p>@Html.ActionLink("Manage Roles", "Index", "Role", new { area = "SecurityGuard" }, null)</p>
+        <table>
+            <tr>
+                <td>
+                    Total Roles:
+                </td>
+                <td>@Model.TotalRolesCount
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
