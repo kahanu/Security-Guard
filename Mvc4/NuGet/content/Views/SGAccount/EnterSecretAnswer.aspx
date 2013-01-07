@@ -43,6 +43,7 @@
             <%: Html.HiddenFor(model => model.Checked) %>
             <%: Html.HiddenFor(model => model.Email) %>
             <%: Html.HiddenFor(model => model.RequireSecretQuestionAndAnswer) %>
+            <%: Html.HiddenFor(model => model.SecretQuestion) %>
             <input type="submit" value="Submit" />
         </p>
     </fieldset>
