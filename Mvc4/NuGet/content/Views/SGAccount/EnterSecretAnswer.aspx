@@ -14,7 +14,7 @@
 <script src="<%: Url.Content("~/Scripts/jquery.validate.min.js") %>" type="text/javascript"></script>
 <script src="<%: Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js") %>" type="text/javascript"></script>
 
-<% using (Html.BeginForm()) { %>
+<% using (Html.BeginForm("ForgotPassword", "SGAccount", FormMethod.Post)) { %>
     <%: Html.AntiForgeryToken() %>
     <%: Html.ValidationSummary() %>
 
