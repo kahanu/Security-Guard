@@ -213,7 +213,7 @@
         });
 
         function OnGetUsersInRoleSuccess(data) {
-            $("li").remove();
+            $("li", ul).remove();
             if (data == "") {
                 ul.append("<li>No user(s).</li>");
             } else {
