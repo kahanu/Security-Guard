@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <appSettings>
+    <add key="SecurityGuardEmailFrom" value="info@email.net" xdt:Transform="Remove" xdt:Locator="Match(key)" />
+    <add key="SecurityGuardEmailSubject" value="Your Password has been reset." xdt:Transform="Remove" xdt:Locator="Match(key)" />
+    <add key="SecurityGuardEmailTemplatePath" value="~/MailerTemplates/ResetPassword.html" xdt:Transform="Remove" xdt:Locator="Match(key)" />  
+  </appSettings>
+  <system.web>
+    <authentication xdt:Transform="Remove" />
+    <authentication mode="None" xdt:Transform="Insert" />
+  </system.web>
+  <system.webServer>
+    <modules>
+      <remove name="FormsAuthentication" xdt:Transform="Insert" />
+    </modules>
+  </system.webServer>
+</configuration>

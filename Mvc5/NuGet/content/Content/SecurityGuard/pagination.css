@@ -1,0 +1,125 @@
+/* start pagination */
+.pagination {
+	background: #d3d3d3 url(images/pag_bg.gif) repeat-x;
+	border: 1px solid #b6b6b6;
+	margin: 8px 0 0;
+	position: relative;
+	top: 0;
+	left: 0;
+	padding: 0 11px;
+	/*width: 643px;*/
+	width: auto;
+	overflow: hidden;
+	line-height: 25px;
+	color: #444;
+	font-size: 12px;
+}
+
+.pagination  .page_no {
+	float: left;
+	color: #444;
+	font-size: 12px;
+	white-space: nowrap;
+	display: block;
+	margin-right: 20px;
+}
+
+.pagination form {
+	float: right;
+	margin: 0;
+	padding: 0;
+}
+
+.pagination fieldset {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	float: left;
+}
+
+.pagination label {
+	float: left;
+	display: block;
+	padding: 0 5px 0 0;
+}
+
+.pagination .pag_inputs {
+	float: left;
+	padding: 1px 0 0;
+}
+
+.pag_list {
+	margin: 0;
+	padding: 0;
+}
+
+.pag_list li {
+	float: left;
+	list-style: none;
+	padding: 0 4px 0 0;
+	color: #444;
+}
+
+.pag_list a:link, .pag_list a:visited, .pag_list a:hover, .pag_list a:active {
+	color: #366fa7;
+}
+
+.pag_list span {
+	font-weight: bold;
+}
+
+.prev, .next {
+	display: block;
+	font-weight: bold;
+}
+
+.prev {
+	background:url(images/prev.gif) no-repeat left center;
+	padding:  0 0 0 10px;
+	margin: 0 1px 0 0;
+}
+
+.next {
+	background:url(images/next.gif) no-repeat right center;
+	padding:  0 10px 0 0;
+	margin: 0 0 0 5px;
+}
+
+.input_go {
+	display: block;
+	line-height: normal;
+	float: left;
+	background: #fff;
+	border: 1px solid #adadad;
+	margin: 2px 3px 0 0;
+	padding: 1px 4px;
+	width: 34px;
+}
+
+.input_go input {
+	display: block;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	background: transparent;
+	border: 0;
+	font-size: 12px;
+}
+
+.pagination .button {
+	float: left;
+	margin: 2px  0 0 ;
+	display: block;
+	width: 18px;
+	height: 19px;
+	background:url(images/go.gif) no-repeat;
+}
+
+.pagination #page-size
+{
+    float: right;
+    width: auto;
+}
+
+/* end pagination */
+

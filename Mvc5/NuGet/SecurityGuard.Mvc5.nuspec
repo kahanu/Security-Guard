@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>SecurityGuard.MVC5</id>
+    <version>1.0.0</version>
+    <authors>Gizmo Beach</authors>
+    <owners>Gizmo Beach</owners>
+    <licenseUrl>http://www.opensource.org/licenses/ms-pl</licenseUrl>
+    <projectUrl>http://www.mvccentral.net/s/43</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An easy-to-use management system for the ASP.NET Membership system built for ASP.NET MVC 5 applications.  This application comes complete with an Area, Controllers, Views and everything you need to start managing your ASP.NET MVC 5 application immediately.</description>
+    <tags>mvc asp.net membership security guard mvc5</tags>
+    <dependencies>
+          <dependency id="MvcMailer" version="4.5" />
+    </dependencies> 
+  </metadata>
+</package>

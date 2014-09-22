@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <appSettings>
+    <add key="SecurityGuardEmailFrom" value="info@email.net" xdt:Transform="Insert" />
+    <add key="SecurityGuardEmailSubject" value="Your Password has been reset." xdt:Transform="Insert" />
+    <add key="SecurityGuardEmailTemplatePath" value="~/MailerTemplates/ResetPassword.html" xdt:Transform="Insert" />  
+  </appSettings>
+  <system.web>
+    <authentication mode="Forms" xdt:Transform="SetAttributes" />
+    <authentication mode="Forms">
+      <forms loginUrl="~/SGAccount/Login" timeout="2880" xdt:Transform="Insert" />
+    </authentication>
+  </system.web>
+  <system.webServer>
+    <modules>
+      <remove name="FormsAuthentication" xdt:Transform="Remove" />
+    </modules>
+  </system.webServer>
+</configuration>
