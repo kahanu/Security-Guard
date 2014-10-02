@@ -143,8 +143,9 @@ namespace $rootnamespace$.Areas.SecurityGuard.Controllers
         #region View User Details Methods
 
         [HttpGet]
-        public ActionResult Update(string userName)
+        public ActionResult Update(UserViewModel userVM)
         {
+            string userName = userVM.userName;
             MembershipUser user = membershipService.GetUser(userName);
 
             UserViewModel viewModel = new UserViewModel();
@@ -265,8 +266,9 @@ namespace $rootnamespace$.Areas.SecurityGuard.Controllers
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public virtual ActionResult GrantRolesToUser(string username)
+        public virtual ActionResult GrantRolesToUser(UserViewModel userVM)
         {
+            string username = userVM.userName;
             if (string.IsNullOrEmpty(username))
             {
                 return RedirectToAction("Index");
