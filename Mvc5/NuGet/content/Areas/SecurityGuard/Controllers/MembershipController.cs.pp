@@ -88,6 +88,11 @@ namespace $rootnamespace$.Areas.SecurityGuard.Controllers
         [HttpPost]
         public virtual ActionResult CreateUser(viewModels.RegisterViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "You are missing required fields.");
+                return RedirectToAction("CreateUser");
+            }
             MembershipUser user;
             MembershipCreateStatus status;
             user = membershipService.CreateUser(model.UserName, model.Password, model.Email, model.SecretQuestion, model.SecretAnswer, model.Approve, out status);
