@@ -88,6 +88,11 @@ namespace $rootnamespace$.Areas.SecurityGuard.Controllers
         [HttpPost]
         public virtual ActionResult CreateUser(viewModels.RegisterViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "You are missing required fields.");
+                return RedirectToAction("CreateUser");
+            }
             MembershipUser user;
             MembershipCreateStatus status;
             user = membershipService.CreateUser(model.UserName, model.Password, model.Email, model.SecretQuestion, model.SecretAnswer, model.Approve, out status);
@@ -143,8 +148,9 @@ namespace $rootnamespace$.Areas.SecurityGuard.Controllers
         #region View User Details Methods
 
         [HttpGet]
-        public ActionResult Update(string userName)
+        public ActionResult Update(UserViewModel userVM)
         {
+            string userName = userVM.userName;
             MembershipUser user = membershipService.GetUser(userName);
 
             UserViewModel viewModel = new UserViewModel();
@@ -265,8 +271,9 @@ namespace $rootnamespace$.Areas.SecurityGuard.Controllers
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public virtual ActionResult GrantRolesToUser(string username)
+        public virtual ActionResult GrantRolesToUser(UserViewModel userVM)
         {
+            string username = userVM.userName;
             if (string.IsNullOrEmpty(username))
             {
                 return RedirectToAction("Index");

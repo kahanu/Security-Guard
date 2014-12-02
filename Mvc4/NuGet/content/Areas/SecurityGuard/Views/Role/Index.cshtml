@@ -220,7 +220,7 @@
                 ul.append("<li>No user(s).</li>");
             } else {
                 $.each(data, function (index, item) {
-                    ul.append("<li><a href=\"/SecurityGuard/Membership/Update/" + item + "\">" + item + "</a></li>");
+                    ul.append("<li><a href=\"/SecurityGuard/Membership/Update?userName=" + item + "\">" + item + "</a></li>");
                 });
             }
         }

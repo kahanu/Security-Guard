@@ -1,4 +1,4 @@
-﻿using System.Web.Security;
+using System.Web.Security;
 
 namespace SecurityGuard.ViewModels
 {
@@ -7,5 +7,6 @@ namespace SecurityGuard.ViewModels
         public MembershipUser User { get; set; }
         public bool RequiresSecretQuestionAndAnswer { get; set; }
         public string[] Roles { get; set; }
+        public string userName { get; set; }
     }
 }

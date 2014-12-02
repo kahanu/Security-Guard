@@ -176,7 +176,7 @@
             var href = '@Url.Action("GrantRolesToUser", "Membership")';
 
             // Concatenate the existing href value with the username
-            var newHref = href + "/" + userName;
+            var newHref = href + "?userName=" + userName;
 
             // Replace the existing href value with the new one
             anchor.attr("href", newHref);

@@ -83,9 +83,10 @@
         });
 
         function OnGrantedSuccess(data) {
-            message.show().delay(5000).fadeOut();    // Show the message
+            message.show().delay(3000).fadeOut();    // Show the message
             $("li", message).addClass("green");      // Apply the Green style
             $("strong", message).text(data.Message); // Insert the message
+            grantedList.val("");
         }
 
         function OnGrantedError(xhr, status, error) {
@@ -123,9 +124,10 @@
         });
 
         function OnRevokedSuccess(data) {
-            message.show().delay(5000).fadeOut();
+            message.show().delay(3000).fadeOut();
             $("li", message).addClass("green");
             $("strong", message).text(data.Message);
+            availableList.val("");
         }
 
         function OnRevokedError(xhr, status, error) {
