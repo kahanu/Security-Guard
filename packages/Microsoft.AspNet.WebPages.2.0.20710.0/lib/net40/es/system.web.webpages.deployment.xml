@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.Web.WebPages.Deployment</name>
+  </assembly>
+  <members>
+    <member name="T:System.Web.WebPages.Deployment.PreApplicationStartCode">
+      <summary>Proporciona un punto de registro para el código de inicio anterior a la aplicación para la implementación de páginas web.</summary>
+    </member>
+    <member name="M:System.Web.WebPages.Deployment.PreApplicationStartCode.Start">
+      <summary>Registra el código de inicio anterior a la aplicación para la implementación de páginas web.</summary>
+    </member>
+    <member name="T:System.Web.WebPages.Deployment.WebPagesDeployment">
+      <summary>Este tipo/miembro admite la infraestructura de .NET Framework y no está prevista su utilización directa desde el código.</summary>
+    </member>
+    <member name="M:System.Web.WebPages.Deployment.WebPagesDeployment.GetAssemblyPath(System.Version)">
+      <summary>Este tipo/miembro admite la infraestructura de .NET Framework y no está prevista su utilización directa desde el código.</summary>
+    </member>
+    <member name="M:System.Web.WebPages.Deployment.WebPagesDeployment.GetExplicitWebPagesVersion(System.String)"></member>
+    <member name="M:System.Web.WebPages.Deployment.WebPagesDeployment.GetIncompatibleDependencies(System.String)">
+      <summary>Este tipo/miembro admite la infraestructura de .NET Framework y no está prevista su utilización directa desde el código.</summary>
+    </member>
+    <member name="M:System.Web.WebPages.Deployment.WebPagesDeployment.GetMaxVersion">
+      <summary>Este tipo/miembro admite la infraestructura de .NET Framework y no está prevista su utilización directa desde el código.</summary>
+    </member>
+    <member name="M:System.Web.WebPages.Deployment.WebPagesDeployment.GetVersion(System.String)">
+      <param name="path">La ruta de acceso del directorio raíz para la aplicación.</param>
+    </member>
+    <member name="M:System.Web.WebPages.Deployment.WebPagesDeployment.GetVersionWithoutEnabledCheck(System.String)">
+      <summary>Este tipo/miembro admite la infraestructura de .NET Framework y no está prevista su utilización directa desde el código.</summary>
+    </member>
+    <member name="M:System.Web.WebPages.Deployment.WebPagesDeployment.GetWebPagesAssemblies">
+      <summary>Este tipo/miembro admite la infraestructura de .NET Framework y no está prevista su utilización directa desde el código.</summary>
+    </member>
+    <member name="M:System.Web.WebPages.Deployment.WebPagesDeployment.IsEnabled(System.String)">
+      <summary>Este tipo/miembro admite la infraestructura de .NET Framework y no está prevista su utilización directa desde el código.</summary>
+    </member>
+    <member name="M:System.Web.WebPages.Deployment.WebPagesDeployment.IsExplicitlyDisabled(System.String)">
+      <summary>Este tipo/miembro admite la infraestructura de .NET Framework y no está prevista su utilización directa desde el código.</summary>
+    </member>
+  </members>
+</doc>
